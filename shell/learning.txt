@@ -1,0 +1,4 @@
+cat /etc/shells ->to know all shells
+bash->bourne again shells
+touch hello.sh  -->make a new shell file
+

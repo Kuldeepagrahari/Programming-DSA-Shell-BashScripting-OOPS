@@ -1,0 +1,1 @@
+{"name":"Local: forces","url":"c:\\Users\\hp\\Desktop\\algo\\CP\\forces.cpp","tests":[{"id":1706628917252,"input":"4\n5\n20 5 1 4 2\n3\n1434 7 1442\n1\n1\n5\n999999999 999999999 999999999 1000000000 1000000000","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\hp\\Desktop\\algo\\CP\\forces.cpp","group":"local","local":true}

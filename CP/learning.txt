@@ -1,0 +1,4 @@
+1.divisible wale questions me sqrt hamesha check karo
+2.sqrt wali algo lag sakti hamesha
+like for(int i=2;i<=sqrtl(x)+1;i++)
++1 isliye kyuki sqrtl(12)=3 but ye 4 se bhi divisible h
