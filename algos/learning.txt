@@ -1,2 +1,10 @@
 Important String Patterns:
  https://leetcode.com/discuss/study-guide/2001789/Collections-of-Important-String-questions-Pattern
+ Using the above table we can calcultate our requirement in O(1) as:
+
+Sum of elements from index L to R = Sum[R]- Sum[L-1]
+Xor of elements from index L to R = Xor[R]- Xor[L-1]
+Next Greater element on left of i = nextGreater[i]
+Next Smaller element on left of i = nextSmall[i]
+Smallest element on left of i = MinLeft[i]
+Greatest element on left of i = MaxLeft[i]

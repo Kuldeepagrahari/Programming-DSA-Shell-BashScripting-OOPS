@@ -265,7 +265,7 @@ signed main()
     int t;
     cin >> t;
     while (t--)
-    {
+    {cout<<pow(2,.5);
         int n, k;
         cin >> n >> k;
         vi v(n);
