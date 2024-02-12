@@ -17,19 +17,16 @@ signed main()
         cin >> v[i];
         ans+=abs(v[i]);
         }
-        int x=0,y=n-1,neg=0;
-        while((v[y]>=0 || v[x]>=0) && y>x){
-             if(v[y]>=0)y--;
-             if(v[x]>=0)x++;
+        bool last_pos = true;
+        for ( int i=0;i<n;i++ ){
+            if(v[i] < 0 && last_pos){
+                c++;
+                last_pos=false;
+            }
+            if( v[i]>0 ){
+                last_pos=true;
+            }
         }
-       for (int i=x;i<=y;i++){
-        if(v[i]<=0){
-            neg++;
-           continue;
-        }
-        else c++;
-       }
-       if(neg>0 && c==0) cout<<ans<<" "<<"1\n";
-       else cout<<ans<<" "<<min(neg,c+1)<<endl;
+        cout << ans << " " << c<<endl;
     }
 }
