@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define ROW_1 4
-#define COL_1 4
+#define ROW_1 16
+#define COL_1 16
 
-#define ROW_2 4
-#define COL_2 4
+#define ROW_2 16
+#define COL_2 16
 
 void print(string display, vector<vector<int> > matrix,
 		int start_row, int start_column, int end_row,
@@ -158,5 +158,4 @@ int main()
 		COL_2 - 1);
 }
 
-// Time Complexity: O(n^3)
-// Code Contributed By: lucasletum
+// Time Complexity: O(n^2.7)
