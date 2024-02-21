@@ -28,31 +28,34 @@ signed main()
        int t;
        cin >> t;
        while ( t-- ){
-          int n;
-          cin >> n;
-          int pro = 1; 
-          vector <int> ans;
-          for ( int i = 2; i * i <= n ;i++ ){
-             if (n % i == 0 ){
-               if( ans.size() < 2 ){
-                pro *= i;
-                ans.push_back(i);
-               }
-              else break;
-              }
-          }
-
-          if ( ans.size() == 2  ){
-            
-            if ( n/pro != ans[0] && n/pro != ans[1]){
-                ans.push_back(n/pro);
-            cout << "YES\n";
-            printer(ans);
+          int n , k;
+         string s;
+        cin>>n>>k;
+        int j = 1;
+        int maxi = log(n)/log(2) +1;
+int ans;
+        while (maxi -- ){
+            int y= pow(2,j);
+            int y2=pow(2,j-1);
+            int x =  (int)(n+y-y2)/y;
+            if ( k > x){
+                 k-=x;
+                
+                 
+                  j++;
             }
-            else cout<<"NO\n";
-          }
+            else {
+                  ans = pow(2,j-1) + (k-1)*pow(2,j);
+                  break;
+            }
+            // cout<<n<<" "<<k<<" ";
+        }
+        cout<<ans<<endl;
 
-          else cout<<"NO\n";
+
+
+
+        
           
     }
 

@@ -28,31 +28,23 @@ signed main()
        int t;
        cin >> t;
        while ( t-- ){
-          int n;
-          cin >> n;
-          int pro = 1; 
-          vector <int> ans;
-          for ( int i = 2; i * i <= n ;i++ ){
-             if (n % i == 0 ){
-               if( ans.size() < 2 ){
-                pro *= i;
-                ans.push_back(i);
-               }
-              else break;
-              }
-          }
+          int n , k;
+         string s;
+        cin>>n;
+        vector<int>v;
+        set<int>st;
+        for(int i=0;i<n;i++){
+            cin>>s;
+            v.push_back(count(s.begin(),s.end(),'1'));
+            if(count(s.begin(),s.end(),'1') > 0)
+            st.insert(count(s.begin(),s.end(),'1'));
+        }
+        if(st.size()==1)cout<<"SQUARE\n";
+        else cout<<"TRIANGLE\n";
 
-          if ( ans.size() == 2  ){
-            
-            if ( n/pro != ans[0] && n/pro != ans[1]){
-                ans.push_back(n/pro);
-            cout << "YES\n";
-            printer(ans);
-            }
-            else cout<<"NO\n";
-          }
 
-          else cout<<"NO\n";
+
+        
           
     }
 

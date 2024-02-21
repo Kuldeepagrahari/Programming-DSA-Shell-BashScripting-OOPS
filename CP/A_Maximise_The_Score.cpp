@@ -28,31 +28,24 @@ signed main()
        int t;
        cin >> t;
        while ( t-- ){
-          int n;
-          cin >> n;
-          int pro = 1; 
-          vector <int> ans;
-          for ( int i = 2; i * i <= n ;i++ ){
-             if (n % i == 0 ){
-               if( ans.size() < 2 ){
-                pro *= i;
-                ans.push_back(i);
-               }
-              else break;
-              }
+          int n , k;
+           cin>>n;
+          int v[2*n];
+         
+          for(int i=0;i<2*n;i++){
+            cin>>v[i];
           }
-
-          if ( ans.size() == 2  ){
-            
-            if ( n/pro != ans[0] && n/pro != ans[1]){
-                ans.push_back(n/pro);
-            cout << "YES\n";
-            printer(ans);
-            }
-            else cout<<"NO\n";
+          sort(v,v+2*n);
+          int ans=0;
+          for(int i =0; i< 2*n ; i+=2){
+            ans+=v[i];
           }
+          cout<<ans<<endl;
+     
 
-          else cout<<"NO\n";
+
+
+        
           
     }
 
