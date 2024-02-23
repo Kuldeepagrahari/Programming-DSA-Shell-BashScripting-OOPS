@@ -34,13 +34,20 @@ signed main()
 
 	while(t--){
         int n;
-        cin>>n;
-        int v[n];
-        for ( int i = 0; i< n ;i ++ ){
-            cin>>v[i];
+        int r,w;
+        int v[22];
+        for(int i=0;i<22;i++){
+            cin>>r>>w;
+            v[i] = r+20*w;
         }
+        int maxi=0,ind;
+        for (int i=0;i<22;i++){
+            if(v[i]>maxi){
+                maxi=v[i];
+                ind=i;
+            }
+        }
+        cout<<ind+1<<endl;
        
-        long long k =2147483647;
-        cout<<n-min(n/2,xorPairCount(v,n,k))<<endl;
     }
 }

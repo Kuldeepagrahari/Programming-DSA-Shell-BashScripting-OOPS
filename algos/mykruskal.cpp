@@ -80,21 +80,20 @@ int main (){
     int n;
     cout << "enter the num of nodes : ";
     cin >> n;
-     vector<vector<int>>edges;
+     vector<vector<int>> edges;
      vector < pair <int,int>> mst;
  
     for ( int i = 0; i< m ;i++ ){
         // vector<int>v;
         int x,y,z;
         cin >> x >> y >> z;
-        edges.push_back({x,y,z});
-    
-        
-        
+        edges.push_back({x,y,z});   
     }
 
     cout << "total weight of mst: " << kruskalMST(n,edges,mst) <<endl;
     pairprinter(mst);
+
+    
 
 
 }

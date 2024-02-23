@@ -35,12 +35,15 @@ signed main()
 	while(t--){
         int n;
         cin>>n;
+        int f=1;
         int v[n];
-        for ( int i = 0; i< n ;i ++ ){
-            cin>>v[i];
-        }
-       
-        long long k =2147483647;
-        cout<<n-min(n/2,xorPairCount(v,n,k))<<endl;
+         for(int i=0;i<n;i++)cin>>v[i];
+         for(int i=0;i<n;i++){
+            if(v[i]<=4){
+                f=0;break;
+            }
+         }
+         if(f==1)cout<<"YES\n";
+         else cout<<"NO\n";
     }
 }

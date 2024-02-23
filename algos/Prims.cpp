@@ -16,16 +16,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class MST
-{
-public:
+
 	
-	int spanningTree(int V, vector<vector<int>> adj[])
+int spanningTree(int V, vector<vector<int>> adj[])
 	{
 		priority_queue<pair<int, int>,
 		               vector<pair<int, int> >, greater<pair<int, int>>> pq;
 
 		vector<int> vis(V, 0);
+		// vector<int>mst;
 		// {wt, node}
 		pq.push({0, 0});
 		int sum = 0;
@@ -34,9 +33,10 @@ public:
 			pq.pop();
 			int node = it.second;
 			int wt = it.first;
-
+            
 			if (vis[node] == 1) continue;
 			// add it to the mst
+			
 			vis[node] = 1;
 			sum += wt;
 			for (auto it : adj[node]) {
@@ -49,14 +49,27 @@ public:
 		}
 		return sum;
 	}
-};
 
+int dist (int u,int v){
+
+}
 
 int main() {
 
 	int V = 5;
     // {u,v,w}
-	vector<vector<int>> edges = {{0, 1, 2}, {0, 2, 1}, {1, 2, 1}, {2, 3, 2}, {3, 4, 1}, {4, 2, 2}};
+	vector<vector<int>> edges;
+	//  = {{0, 1, 2}, {0, 2, 1}, {1, 2, 1}, {2, 3, 2}, {3, 4, 1}, {4, 2, 2}};
+    int cord[V][2];
+
+	
+	for ( int i =0 ;i< V;i++ ){
+		cin >> cord[i][0];
+		cin >> cord[i][1];
+}
+	for (int i =0; i< V;i++){
+		int 
+	}
 	vector<vector<int>> adj[V];
 	for (auto it : edges) {
 		vector<int> tmp(2);
@@ -69,8 +82,8 @@ int main() {
 		adj[it[1]].push_back(tmp);
 	}
 
-	MST obj;
-	int sum = obj.spanningTree(V, adj);
+
+	int sum = spanningTree(V, adj);
 	cout << "The sum of all the edge weights: " << sum << endl;
 
 	return 0;

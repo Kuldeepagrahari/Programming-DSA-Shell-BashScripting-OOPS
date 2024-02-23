@@ -33,14 +33,15 @@ signed main()
     cin>>t;
 
 	while(t--){
-        int n;
-        cin>>n;
-        int v[n];
-        for ( int i = 0; i< n ;i ++ ){
-            cin>>v[i];
-        }
+        // int n;
+       int n,m,x,y,l;
+       cin >> n >> m >> x >> y >> l;
+       int x1=(n-x)/l;
+       int x2=(x-1)/l;
+       int y1=(m-y)/l;
+       int y2=(y-1)/l;
+       int ans=(x1+1+x2)*(y1+1+y2);
+       cout<<ans<<endl;
        
-        long long k =2147483647;
-        cout<<n-min(n/2,xorPairCount(v,n,k))<<endl;
     }
 }

@@ -13,10 +13,13 @@ signed main(){
         int flag=1;
         a*=2;
         b/=2;
+      /* The code snippet `aa/=2; bb*=2; if( a!= || aa!=aaa)cout <<"yes\n"; else cout <<"no\n";` is
+      performing the following operations: */
         aa/=2;
         bb*=2;
-        if( a!= || aa!=aaa)cout <<"yes\n";
+        if( a!= a|| aa!=aaa)cout <<"yes\n";
         else cout <<"no\n";
+    
         // if ( (a!=aaa && b==bbb) || (aa==aaa && bb==bbb))
         // if ( a%2==0 ){
         //     if( b%2==0 ){
