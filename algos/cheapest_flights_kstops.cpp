@@ -10,7 +10,7 @@ int dijkstra(int n, vector<vector<int>> &edges, int k, int dst, int src)
     {
         adj[it[0]].push_back({it[1], it[2]});
     }
-
+cout<<"hey";
     vector<int> dist(V);
     for (int i = 0; i < V; i++)
         dist[i] = 1e5 + 1;
