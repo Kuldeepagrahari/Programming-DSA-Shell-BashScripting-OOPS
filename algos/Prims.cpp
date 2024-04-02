@@ -67,9 +67,7 @@ int main() {
 		cin >> cord[i][0];
 		cin >> cord[i][1];
 }
-	for (int i =0; i< V;i++){
-		int 
-	}
+	
 	vector<vector<int>> adj[V];
 	for (auto it : edges) {
 		vector<int> tmp(2);

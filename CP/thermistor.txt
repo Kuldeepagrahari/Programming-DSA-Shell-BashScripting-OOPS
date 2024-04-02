@@ -1,0 +1,49 @@
+To calculate the resistance across the thermistor, we can use the formula for a voltage divider circuit:
+
+\[ V_{\text{Sense}} = V_{\text{REF}} \times \frac{R_{\text{thermistor}}}{R_{\text{bias}} + R_{\text{thermistor}}} \]
+
+Given:
+
+- \( V_{\text{REF}} = 3.3 \) V
+- \( R_{\text{bias}} = 10 \) kΩ
+- \( I_{\text{bias}} = 200 \) µA
+- \( \text{ADC LSB value} = 2,024 \)
+
+First, let's calculate the voltage across the thermistor using the given ADC LSB value:
+
+\[ V_{\text{ADC}} = \frac{V_{\text{REF}}}{2^{12}} \times \text{ADC LSB value} \]
+
+\[ V_{\text{ADC}} = \frac{3.3 \text{ V}}{2^{12}} \times 2024 \]
+
+\[ V_{\text{ADC}} \approx 0.8155 \text{ V} \]
+
+Now, let's rearrange the voltage divider formula to solve for \( R_{\text{thermistor}} \):
+
+\[ R_{\text{thermistor}} = R_{\text{bias}} \times \frac{V_{\text{REF}} - V_{\text{ADC}}}{V_{\text{ADC}}} \]
+
+\[ R_{\text{thermistor}} = 10 \text{ kΩ} \times \frac{3.3 \text{ V} - 0.8155 \text{ V}}{0.8155 \text{ V}} \]
+
+\[ R_{\text{thermistor}} \approx 30.606 \text{ kΩ} \]
+
+Now, we can use the given lookup table to find the closest temperature corresponding to this resistance. Based on the table, we would interpolate between the two nearest resistance values in the table to find the closest temperature.
+
+Let's denote the resistance values in the table as \( R_1 \) and \( R_2 \) with corresponding temperatures \( T_1 \) and \( T_2 \). We'll find the closest temperature \( T_{\text{closest}} \) using linear interpolation:
+
+\[ T_{\text{closest}} = T_1 + \frac{(R_{\text{thermistor}} - R_1) \times (T_2 - T_1)}{R_2 - R_1} \]
+
+From the table:
+
+\[ R_1 = 29 \text{ kΩ}, \quad R_2 = 35 \text{ kΩ} \]
+\[ T_1 = 25^\circ \text{C}, \quad T_2 = 15^\circ \text{C} \]
+
+Substituting these values:
+
+\[ T_{\text{closest}} = 25 + \frac{(30.606 - 29) \times (15 - 25)}{35 - 29} \]
+
+\[ T_{\text{closest}} \approx 25 + \frac{(1.606) \times (-10)}{6} \]
+
+\[ T_{\text{closest}} \approx 25 - 2.6767 \]
+
+\[ T_{\text{closest}} \approx 22.32^\circ \text{C} \]
+
+So, the resistance across the thermistor is approximately 30.606 kΩ, and the closest temperature according to the lookup table is approximately \( 22.32^\circ \text{C} \).

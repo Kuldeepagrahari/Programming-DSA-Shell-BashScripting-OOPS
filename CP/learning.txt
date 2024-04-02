@@ -6,3 +6,61 @@ like for(int i=2;i<=sqrtl(x)+1;i++)
 ** har case ko khud mat solve krne ki taraf jao 
 , tum jo cases/contraint khud handle ho jaega 
 vo dekho fir jo tumhe handle krne padege vo dekho logic create karo
+
+STICK LENGTHS
+5
+1 4 5 100 100
+min cost to make all lengths equal
+ here i dont need to preserve the total length of all sticks so make all stick of length eqaul to length of stick at middle pos in sorted len array
+ i.e. 5
+concl: avg par har stick par kaam krna padega jab uniformly lengths divide nhi h jaise ki example hamne liya h
+par median par in caso par kuch ko kam kaam krna padega 
+
+
+      int n;
+       cin >> n;
+       int v[n];
+       int med = 0;
+       for ( int i =0 ;i < n ;i ++ ){cin >> v[i]; }
+       sort ( v, v+n);
+       int ans = 0;
+       for ( int  i = 0 ; i< n; i++ ){
+        ans += abs(v[n/2] - v[i] );
+       }
+        cout << ans << endl;
+    
+---------- binary search -----------
+    longest subarray with sum k
+              |-----------------|
+    1 1 0 0 1 |0 0 1 1 0 0 0 0 0| 1 1 
+              |-----------------|
+    k = 2
+    output = 7(no.of elements need to delete from start or end)
+    approach : binary search(lowerbound) in prefix array from last
+
+        int v[n];
+        int sum = 0;
+        for ( int i = 0; i < n ;i ++ ){ 
+            cin >> v[i];
+            sum += v[i];
+        }
+        int rest = sum - k;
+        if ( sum < k )cout << "-1\n";
+        else if ( sum == k )cout << "0\n";
+        else 
+        {   
+           int pre [n+1] ;
+           pre[0] = 0;
+           for ( int i = 0; i <n ;i++ ){
+            pre[i+1] = pre[i] + v[i];
+           }
+           int ans = 1e9;
+            for ( int i = n; i >= 1 ;i -- ){
+               int ind = lower_bound ( pre , pre + n +1 , pre[i] - k )-pre;
+            //    cout << ind << " ";
+               ans = min ( ans, ind-1+n+1-i );
+
+            }
+            cout << ans << endl;
+        }
+      

@@ -39,7 +39,7 @@ public:
 
 int kruskalMST(int n, vector<vector<int>> &edges, vector < pair <int,int>> &mst)
 {
-	// Write your code here.
+	
 	vector< pair< int, pair<int,int> > > edge;
 	for ( int i = 0; i< edges.size(); i++ ){
           edge.push_back({edges[i][2], {edges[i][0], edges[i][1]}});
@@ -90,10 +90,11 @@ int main (){
         edges.push_back({x,y,z});   
     }
 
-    cout << "total weight of mst: " << kruskalMST(n,edges,mst) <<endl;
+    cout << "minimum reparation cost: " << kruskalMST(n,edges,mst) << endl;
+    cout << "we need to repair following roads"<< endl;
     pairprinter(mst);
 
-    
+    // O(E*logE + E*logV)
 
 
 }

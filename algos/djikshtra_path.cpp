@@ -21,6 +21,16 @@ int djikshtra ( int dist[],int parent[], vector<vector<int>> adj[] ) {
       }
       }
 }
+
+void printPath ( int src, int des, int parent[] ) {
+     int node = des;
+     cout << node << "<--";
+     while ( parent[node] != src ){
+         node = parent[node];
+         cout << node << "<--";
+     }
+     cout << src << endl;
+}
 int main(){
     int V = 5;
     // cin >> V;
@@ -32,8 +42,9 @@ int main(){
         adj[it[1]].push_back({it[0],it[2]});
 	}
 
-      int dist[V]={100000};
-     
+      int dist[V];
+      for ( int i = 0 ;i < V; i++ ) dist[i] = 1e5;
+    //  cout << dist[2];
       int parent[V];
       for ( int i =0 ; i< V; i++ )parent[i] = i;
     //   djikshtra(dist,parent,adj);
@@ -57,7 +68,7 @@ int main(){
          }
       }
       }
-      
+      printPath ( 0,4, parent );
       for ( int i =0; i< V;i ++ ){
            cout<<dist[i]<<" ";
       }

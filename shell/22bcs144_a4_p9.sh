@@ -1,22 +1,23 @@
-#!/bin/sh
-echo "sam"
+cs() {
+    s1=$1
+    s2=$2
 
-fun(){
-  str=""
-  str=$1
-  str2=""
-  for (( i=$2;i<=$3;i++ ))
-  do
-    str2+=${str:$i:1}
-  done
-  
+    cs="$s1$s2"
+    echo "$cs"
 }
-read s1
-read s2
-s3=${s1}${s2}
-echo $s3
 
-read x
-read y
-fun $s1 $x $y
-echo $str2
+es() {
+    cs=$1
+    si=$2
+    ei=$3
+
+    ss="${cs:$si:$((ei - si + 1))}"
+    echo "$ss"
+}
+
+
+c=$(cs "Hi" "There")
+echo "Concatenated string: $c"
+
+s=$(es "$c" 0 1)
+echo "Extracted substring: $s"
