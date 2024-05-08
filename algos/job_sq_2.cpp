@@ -53,8 +53,13 @@ signed main(){
     seq.push_back(pq.top()[2]);
     pq.pop();
    }
-   reverse(seq.begin(),seq.end());
-   for ( auto & ss : seq) cout << ss << "--> " ;
+//    reverse(seq.begin(),seq.end());
+//    reverse(seq.begin(),seq.end());
+   cout << "deadline/timestamp: ";
+   for ( int i = 1; i <= 2 ; i++ )cout << i <<"|" ;
+   cout << endl;
+   cout << "id:                 ";
+   for ( auto & ss : seq) cout << ss << "|" ;
    cout << "end\n";
    cout << " maximum profit = " << ans << endl;
 }
