@@ -8,6 +8,9 @@ void dijikstra(vector<vector<int>> edges, int V)
 
     for (int i = 0; i < edges.size(); i++)
     {
+        /* The lines `adj[edges[i][0]].push_back(edges[i][2]);` and
+        `adj[edges[i][1]].push_back(edges[0][2]);` are adding edges to the adjacency list
+        representation of a graph. */
         adj[edges[i][0]].push_back(edges[i][2]);
         adj[edges[i][1]].push_back(edges[0][2]);
     }
