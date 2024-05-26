@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+  #include<bits/stdc++.h>
 using namespace std;
 #define int long long
  
@@ -25,7 +25,7 @@ void pairprint(const Container &container)
 }
 
 
-// ------------------------ lets begin sam --------------
+// ------------------------
 signed main(){
    
     ios_base::sync_with_stdio(false);
@@ -36,15 +36,29 @@ signed main(){
  
     while ( t-- ){
 
-        int x, y, a, b, c, d, m , n;
+        int n , m;
+        cin >> n >> m;
+        int ans = 0;
+        if ( n < 1000 ){
+            n += 1000;
+            ans = n*pow(2,(m-1));
+
+        }
+        else {
+            ans = n*pow(2,m);
+
+        }
+
+        cout << ans << endl;
+
+        
+
+
+       
+
+
  
-        cin >> n ;
-        vector < int > v ( n );
-         
-
-         
-        printer(v);
-
+      
     
  
  

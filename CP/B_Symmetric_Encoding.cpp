@@ -25,7 +25,7 @@ void pairprint(const Container &container)
 }
 
 
-// ------------------------ lets begin sam --------------
+// ------------------------
 signed main(){
    
     ios_base::sync_with_stdio(false);
@@ -38,12 +38,43 @@ signed main(){
 
         int x, y, a, b, c, d, m , n;
  
-        cin >> n ;
-        vector < int > v ( n );
-         
+        cin >> n;
 
-         
-        printer(v);
+        string ss;
+        cin >> ss;
+
+        set<char> st;
+
+        for ( int i = 0 ; i < n ; i ++ ){
+            st.insert( ss[i] );
+
+        }
+
+        string s = "";
+        for ( auto it : st ){
+             s += it;
+        }
+
+        map<char,char> mp;
+        int ls = s.length();
+        for (int i = 0 ; i <  ls ; i ++ ){
+           mp[s[i]] = s[ls-i-1];
+        }
+
+        for ( int i = 0 ; i < n; i ++  ){
+            ss[i] = mp[ss[i]];
+        }
+
+
+
+
+        cout << ss << endl;
+
+
+       
+
+        // vector < int > v ( n );
+        // printer(v);
 
     
  

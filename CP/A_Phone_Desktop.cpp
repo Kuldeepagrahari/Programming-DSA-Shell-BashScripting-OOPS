@@ -25,7 +25,7 @@ void pairprint(const Container &container)
 }
 
 
-// ------------------------ lets begin sam --------------
+// ------------------------
 signed main(){
    
     ios_base::sync_with_stdio(false);
@@ -38,12 +38,22 @@ signed main(){
 
         int x, y, a, b, c, d, m , n;
  
-        cin >> n ;
-        vector < int > v ( n );
-         
+        cin >> x >> y;
 
-         
-        printer(v);
+        int ans = y%2==0 ? y / 2 : y / 2 + 1;
+        int single_boxes = y%2!=0 ? 7 * ans + 4 : ans * 7;
+
+        if ( x > single_boxes ){
+            x -= single_boxes;
+            ans += x%15==0 ? x/15 : x/15+1;
+        }
+        
+
+        cout << ans << endl;
+
+
+        // vector < int > v ( n );
+        // printer(v);
 
     
  
