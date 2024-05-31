@@ -36,41 +36,33 @@ signed main(){
  
     while ( t-- ){
 
-        int n;
- 
-        cin >> n;
-        int l1, l2 , l3 ;A
-        vector<int> ss;
-        vector<int> s;
-        int num = n;
-        while ( num-- ){
-            int l;
-            cin >> l;
-            vector<int> v(l);
-            for ( int i = 0 ; i< l ; i ++ ){
-                cin >> v[i];
-            }
-            sort ( v.begin(), v.end());
-            ss.push_back(v[1]);
-            s.push_back(v[0]);
+       int n , m ; 
+       cin >> n;
 
-            
-        }
-         int ans = 0;
-         sort ( ss.begin(), ss.end());
-         sort ( s.begin(), s.end());
+       vector<int > v(n);
+    for (int i = 0 ; i < n ;  i ++ )cin >> v[i];
+    
+    vector<int> v2 = v;
+    sort ( v2.begin(), v2.end());
 
-        //  printer(ss);
-        //  printer(s);
-        for ( int  i = 1; i < n ; i++ ){
-            ans += ss[i];
-            // cout<<n<<endl;
-        }
-         ans += s[0];
+    int c  = 0;
+    if(v2 == v )cout << "YES\n";
+    else {
+           for ( int i = 0 ; i <  n-1 ; i++ ){
+        if ( v[i] <= v[i+1] )continue;
+        else c++;
+    
+    }
 
-         cout << ans << endl;
+    if ( c > 1)cout << "NO\n";
+    else {
+        if ( v[n-1]  <= v[0] )cout << "YES\n";
+        else cout <<
+        "NO\n";
+    }
+  }
 
        
     }
+
 }
-            
