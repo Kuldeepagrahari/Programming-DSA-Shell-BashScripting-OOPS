@@ -90,11 +90,49 @@ signed main()
     while (t--)
     {
 
-        int x, y, a, b, c, d, m, n;
+        int x, y, a, b, c, d, m, n ,k;
 
-        cin >> n;
-        vector<int> v(n);
+        cin >> n ;
+        vector<pair<int, int>> vp;
+        // vector<int> v(n);
+        // vector<int> v2(n);
 
-        printer(v);
+        // for ( int i = 0 ; i < n ; i ++ )cin >> v[i];
+        // for ( int i = 0 ; i < n ; i ++ )cin >> v2[i];
+     
+
+        // string s, s2;
+        // cin >> s >> s2;
+
+        // swap(s[0], s2[0]);
+        // cout << s <<" " << s2 << endl;
+
+        int sum = 0;
+        int ans = 2;
+        for ( int i = 2; i <= n; i++ ){
+            int loc = 0;
+            int j = 1;
+            while ( i*j <= n ){
+                loc += i * j;
+                j++;
+                // if ( loc > n ){loc -= i;break;}
+            }
+            if ( sum < loc ){
+                ans = i;
+                sum = loc;
+            }
+
+        }
+        cout << ans << endl;
+
+
+       
+     
+
+
+       
+
+        // printer(v);
+        // pairprint(v);
     }
 }

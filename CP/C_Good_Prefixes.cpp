@@ -90,11 +90,47 @@ signed main()
     while (t--)
     {
 
-        int x, y, a, b, c, d, m, n;
+        int x, y, a, b, c, d, m, n ,k;
 
-        cin >> n;
+        cin >> n ;
+        // vector<pair<int, int>> vp;
         vector<int> v(n);
+        vector<int> maxi(n);
+        vector<int> pre(n+1,0);
+        // vector<int> v2(n);
 
-        printer(v);
+        for ( int i = 0 ; i < n ; i ++ )cin >> v[i];
+        // for ( int i = 0 ; i < n ; i ++ )cin >> v2[i];
+     
+        for ( int i = 0 ; i< n; i++ ){
+            pre[i+1] = pre[i] + v[i];
+        }
+        maxi[0] = v[0];
+        for ( int i = 1 ; i < n ; i++ ){
+            maxi[i] = max ( maxi[i-1],v[i] ) ;
+            // cout << "maxi:" << maxi[i] << " ";
+        }
+        int sam = 0;
+        for ( int i = 0 ;i < n ; i++ ){
+            int rest = pre[i+1] - maxi[i];
+            if ( rest == maxi[i]){
+                sam++;
+            }
+        }
+
+        // printer(maxi);
+        // printer(pre);
+        // cout << "-------------------------";
+        cout << sam << endl;
+
+          
+       
+     
+
+
+       
+
+        // printer(v);
+        // pairprint(v);
     }
 }

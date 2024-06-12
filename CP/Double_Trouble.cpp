@@ -90,11 +90,34 @@ signed main()
     while (t--)
     {
 
-        int x, y, a, b, c, d, m, n;
+        int x, y, a, b, c, d, m, n ,k;
 
-        cin >> n;
+        cin >> n ;
+        vector<pair<int, int>> vp;
         vector<int> v(n);
+        vector<int> v2(n);
 
-        printer(v);
+        for ( int i = 0 ; i < n ; i ++ )cin >> v[i];
+        for ( int i = 0 ; i < n ; i ++ )cin >> v2[i];
+        c = 1;
+        for ( int i = 0 ; i < n - 1 ; i++ ){
+            if ( v[i] + v2[i] < v[i+1]   &&  v[i+1] - v2[i+1] > v[i] )c++;
+        }
+        if ( c > 2 )cout << "NO\n";
+        else cout << "YES\n";
+
+
+
+
+
+
+       
+     
+
+
+       
+
+        // printer(v);
+        // pairprint(v);
     }
 }

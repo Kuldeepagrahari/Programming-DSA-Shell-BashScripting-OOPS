@@ -93,8 +93,25 @@ signed main()
         int x, y, a, b, c, d, m, n;
 
         cin >> n;
-        vector<int> v(n);
+        vector<pair<int, int>> v;
 
-        printer(v);
+        for ( int i = 0; i < n; i++ ){
+            int a, b;
+            cin >> a >> b;
+
+            v.push_back({a,b});
+        }
+        int ans = 0;
+        for ( int i = 0 ; i < n ; i ++ ){
+            for ( int j =  i + 1 ; j < n ; j++ ){
+                ans = max ( ans, v[i].first*v[j].second + v[j].first*v[i].second );
+            }
+        }
+
+        cout << ans << endl;
+
+
+        // printer(v);
+        // pairprint(v);
     }
 }

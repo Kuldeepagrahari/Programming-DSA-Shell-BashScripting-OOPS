@@ -90,11 +90,36 @@ signed main()
     while (t--)
     {
 
-        int x, y, a, b, c, d, m, n;
+        int x, y, a, b, c, d, m, n ,k;
 
-        cin >> n;
+        cin >> n >> k;
+        vector<pair<int, int>> vp;
         vector<int> v(n);
 
-        printer(v);
+        for ( int i = 0 ; i < n ; i ++ )cin >> v[i];
+        int dif = 0 ;
+        for ( int i = 0 ; i  <  n - 1 ;  i++ ){
+            dif += abs ( v[i] - v[i+1] );
+        }
+        int cmp = dif;
+
+        for ( int i = 0 ; i < n   ; i ++ ){
+           if ( i == 0 ) dif = max ( dif, cmp - abs(v[i]-v[i+1]) + max ({abs(v[i]-v[i+1]), abs(v[i+1] - k), v[i+1] - 1 }) );
+           else if ( i != 0 && i != n-1 ){
+                  dif = max ( dif, cmp - (abs(v[i]-v[i-1] )+ abs(v[i]-v[i+1])) + max ({(abs(v[i]-v[i-1] )+ abs(v[i]-v[i+1])) , abs(v[i+1] - k) + abs(v[i-1] - k), v[i+1] - 1 + abs(v[i-1] - 1) }) );
+            }
+            else {
+                 dif = max ( dif, cmp - abs(v[i]-v[i-1]) + max ({abs(v[i]-v[i-1]), abs(v[i-1] - k), v[i-1] - 1 }) );
+            }
+
+        }
+        cout << dif << endl;
+
+
+
+       
+
+        // printer(v);
+        // pairprint(v);
     }
 }
