@@ -265,44 +265,9 @@ signed main()
     int t;
     cin >> t;
     while (t--)
-    {  int n,m,k;
-       cin>>n>>k;
-       vi ans(n);
-       int i=0;
-       int c=0;
-       int flag=0;
-       while(c!=n){
-          if(flag==0){
-            ans[i]=++c;
-            i+=k;
-            if(i>n-1){
-                flag=1;
-                i-=k;
-                if(i+1<=n-1){
-                    i++;
-                }
-                else{
-                    i-=(k-1);
-                }
-            }
-          }
-          else{
-            ans[i]=++c;
-            i-=k;
-            if(i<0){
-                i+=k;
-                flag=0;
-                 if(i+1<=n-1){
-                    i++;
-                }
-                else{
-                    break;
-                }
-            }
-          }
-        
-       }
-       printer(ans);
+    {  
+        cout << isprime(10000000);
+     
        
        
 

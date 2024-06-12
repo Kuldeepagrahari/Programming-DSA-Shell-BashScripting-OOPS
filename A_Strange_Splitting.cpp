@@ -109,7 +109,7 @@ void samPairPrinter(const Container &samContainer)
 
 class samMaths
 {
-  public:
+public:
     int samBinMultiply(int samA, int samB)
     {
         int samResult = 0;
@@ -208,35 +208,21 @@ class samMaths
         }
         return samPrimeFactors;
     }
-     int nCr ( int n, int r ){
-        int maxi = max ( r, n-r );
-        int mini = min ( r, n-r );
-
-        long long num = 1;
-        for ( int i = n ; i >= 1 + maxi ; i--  ){
-            num *= i;
-        }
-
-        long long deno = 1;
-        for ( int i = 1; i <= mini; i++ ){
-            deno *= i;
-        }
-
-        return num / deno;
-    }
 
     int samCalculateNcR(int n, int r)
     {
-        int maxi = max ( r, n-r );
-        int mini = min ( r, n-r );
+        int maxi = max(r, n - r);
+        int mini = min(r, n - r);
 
         LL num = 1;
-        for ( int i = n ; i >= 1 + maxi ; i--  ){
+        for (int i = n; i >= 1 + maxi; i--)
+        {
             num *= i;
         }
 
         LL deno = 1;
-        for ( int i = 1; i <= mini; i++ ){
+        for (int i = 1; i <= mini; i++)
+        {
             deno *= i;
         }
 
@@ -391,20 +377,53 @@ class samMaths
 
 class samProblemSolver
 {
-    private:
-           samGraph G();
-           samMaths ramanujan;
+private:
+    samGraph G();
+    samMaths ramanujan;
 
-    public:
-       int solve ( int a, int b){
-          vi v = {1,2,3};
-          samPrinter(v);
-          return ramanujan.samModularExponentiation(a,b,Mod);
-       }
-       
+public:
+    void solve()
+    {
+
+        int t;
+        cin >> t;
+        while (t--)
+        {
+            int n, a, b, x, y, z, m;
+            cin >> n;
+            vi v(n);
+            set<int> st;
+            mii mp;
+
+            fl(i, 0, n) cin >> v[i];
+            fl(i, 0, n) st.insert(v[i]);
+            
+            if (st.size() == 1)
+                cout << "NO\n";
+            else
+            {
+                string s = "";
+                fl(i, 0, n) s += 'B';
+
+                if (v[0] != v[1])
+                    s[1] = 'R';
+                else
+                    s[0] = 'R';
+
+                cout << "YES\n";
+                cout << s << endl;
+            }
+        }
+    }
 };
 int main()
 {
+
+    samProblemSolver god;
+
+    god.solve();
+
+    // ------------------------------------------------------------------------------------------------
     // Sample code to demonstrate usage
     // samGraph samG(5);
     // samG.samAddEdge(0, 1);
@@ -429,19 +448,4 @@ int main()
     // cout << "Is 17 a prime number? " << (samM.samIsPrime(17) ? "Yes" : "No") << endl;
     // cout << "Combination of 5 choose 2: " << samM.samCalculateCombination(5, 2) << endl;
     // -------------------------------------------------------------------------------------------
-
-    samProblemSolver god;
-
-    // ------------------------------------------------------------------------------------------------
-    int n = 34;
-    vi v;
-    samPrinter(v);
-    cout << god.solve(2,4);
-
-
-
-
-    
-
-    
 }

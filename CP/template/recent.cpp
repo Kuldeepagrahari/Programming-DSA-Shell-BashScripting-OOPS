@@ -208,23 +208,7 @@ class samMaths
         }
         return samPrimeFactors;
     }
-     int nCr ( int n, int r ){
-        int maxi = max ( r, n-r );
-        int mini = min ( r, n-r );
-
-        long long num = 1;
-        for ( int i = n ; i >= 1 + maxi ; i--  ){
-            num *= i;
-        }
-
-        long long deno = 1;
-        for ( int i = 1; i <= mini; i++ ){
-            deno *= i;
-        }
-
-        return num / deno;
-    }
-
+ 
     int samCalculateNcR(int n, int r)
     {
         int maxi = max ( r, n-r );
@@ -396,15 +380,32 @@ class samProblemSolver
            samMaths ramanujan;
 
     public:
-       int solve ( int a, int b){
-          vi v = {1,2,3};
-          samPrinter(v);
-          return ramanujan.samModularExponentiation(a,b,Mod);
+       void solve (){
+
+          int t;
+          cin >> t;
+          while (t-- ){
+            int n,a,b,x,y,z,m;
+            cin >> n;
+            vi v(n);
+            fl(i,0,n) cin >> v[i];
+            cout << *max_element(all(v)) << endl;
+
+
+          }
+        
+          
        }
        
 };
 int main()
 {
+    
+    samProblemSolver god;
+    
+    god.solve();
+
+    // ------------------------------------------------------------------------------------------------
     // Sample code to demonstrate usage
     // samGraph samG(5);
     // samG.samAddEdge(0, 1);
@@ -430,13 +431,7 @@ int main()
     // cout << "Combination of 5 choose 2: " << samM.samCalculateCombination(5, 2) << endl;
     // -------------------------------------------------------------------------------------------
 
-    samProblemSolver god;
 
-    // ------------------------------------------------------------------------------------------------
-    int n = 34;
-    vi v;
-    samPrinter(v);
-    cout << god.solve(2,4);
 
 
 
