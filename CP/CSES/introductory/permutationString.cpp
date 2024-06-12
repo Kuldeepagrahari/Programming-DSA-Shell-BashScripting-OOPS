@@ -1,11 +1,8 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-
-#define int long long
-
-#define yes cout << "YES\n"
-#define no cout << "NO\n"
+#define Yes cout << "YES\n"
+#define No cout << "NO\n"
 #define all(v) v.begin(), v.end()
 #define vi vector<int>
 #define vii vector<vector<int>>
@@ -20,243 +17,310 @@ using namespace std;
 #define first ff
 #define int long long
 
-const int M = 1e9 + 7;
-const double epsilon = 1e-6;
-const int ARR = 1e7;
-const long long X = 1e12;
-
-template <typename Container>
-void printer(const Container &container) {
-    for (auto it = std::begin(container); it != std::end(container); ++it) {
-        std::cout << *it << " ";
-    }
-    std::cout << std::endl;
-}
-
-template <typename Container>
-void pairprint(const Container &container) {
-    for (auto it = std::begin(container); it != std::end(container); ++it) {
-        std::cout << "(" << it->first << ", " << it->second << ") ";
-    }
-    std::cout << std::endl;
-}
-
-class Sam {
+class samGraph {
 public:
-    int binmultiply(int a, int b) {
-        int ans = 0;
-        while (b > 0) {
-            if (b & 1) {
-                ans = (ans + a) % M;
-            }
-            a = (a + a) % M;
-            b >>= 1;
-        }
-        return ans;
+    int samVertices;
+    vector<vector<int>> samAdjacencyList;
+
+    samGraph(int samVertices) {
+        this->samVertices = samVertices;
+        samAdjacencyList.resize(samVertices);
     }
 
-    double power(double x, long n) {
-        if (n == 0) {
-            return 1.0;
-        }
-        double half = power(x, n / 2);
-        if (n % 2 == 0) {
-            return half * half;
-        }
-        return x * half * half;
+    void samAddEdge(int samVertex1, int samVertex2) {
+        samAdjacencyList[samVertex1].pb(samVertex2);
+        samAdjacencyList[samVertex2].pb(samVertex1);  // Assuming undirected graph
     }
 
-    int fact(int n) {
-        int ans = 1;
-        fl(i, 1, n + 1) {
-            ans = (ans * i) % M;
-        }
-        return ans;
-    }
+    void samBFS(int samStartVertex) {
+        vector<bool> samVisited(samVertices, false);
+        queue<int> samQueue;
+        samVisited[samStartVertex] = true;
+        samQueue.push(samStartVertex);
 
-    double squareroot(int n) {
-        double mid, l = 1, r = n;
-        while (r - l >= epsilon) {
-            mid = l + (r - l) / 2;
-            if (mid * mid == n)
-                return mid;
-            else if (mid * mid < n) {
-                l = mid;
-            } else {
-                r = mid;
-            }
-        }
-        return mid;
-    }
+        while (!samQueue.empty()) {
+            int samCurrentVertex = samQueue.front();
+            cout << samCurrentVertex << " ";
+            samQueue.pop();
 
-    int isprime(long long n) {
-        vi v(X, 1);
-        v[0] = v[1] = 0;
-        fl(i, 2, X) {
-            if (v[i] == 1) {
-                for (int j = 2 * i; j < X; j += i) {
-                    v[j] = 0;
+            for (auto samAdjacentVertex : samAdjacencyList[samCurrentVertex]) {
+                if (!samVisited[samAdjacentVertex]) {
+                    samVisited[samAdjacentVertex] = true;
+                    samQueue.push(samAdjacentVertex);
                 }
             }
         }
-        return v[n];
-    }
-
-    unordered_map<int, int> primes(long long n) {
-        vi v(n, 1);
-        v[0] = v[1] = 0;
-        unordered_map<int, int> primefac;
-        fl(i, 2, n) {
-            if (v[i] == 1) {
-                primefac[i] = 1;
-                for (int j = 2 * i; j < n; j += i) {
-                    v[j] = 0;
-                }
-            } else {
-                primefac[i * i] = 0;
-            }
-        }
-        return primefac;
-    }
-
-    int nCr(int n, int r) {
-        return fact(n) / (fact(r) * fact(n - r));
-    }
-
-    void primefactors(int n) {
-        vi v(ARR, 1);
-        vi lp(ARR, 0), hp(ARR, 0);
-        v[0] = v[1] = 0;
-        fl(i, 2, ARR) {
-            if (v[i] == 1) {
-                lp[i] = hp[i] = i;
-                for (int j = 2 * i; j < ARR; j += i) {
-                    v[j] = 0;
-                    hp[j] = i;
-                    if (lp[j] == 0)
-                        lp[j] = i;
-                }
-            }
-        }
-        vi pfs;
-        while (n > 1) {
-            int pf = hp[n];
-            while (n % pf == 0) {
-                n /= pf;
-                pfs.pb(pf);
-            }
-        }
-        fl(i, 0, pfs.size()) cout << pfs[i] << " ";
         cout << endl;
     }
 
-    bool isPerfectSquare(long double x) {
-        if (x >= 0) {
-            long long sr = sqrt(x);
-            return (sr * sr == x);
+    void samDFSUtil(int samVertex, vector<bool> &samVisited) {
+        samVisited[samVertex] = true;
+        cout << samVertex << " ";
+
+        for (auto samAdjacentVertex : samAdjacencyList[samVertex]) {
+            if (!samVisited[samAdjacentVertex]) {
+                samDFSUtil(samAdjacentVertex, samVisited);
+            }
+        }
+    }
+
+    void samDFS(int samStartVertex) {
+        vector<bool> samVisited(samVertices, false);
+        samDFSUtil(samStartVertex, samVisited);
+        cout << endl;
+    }
+};
+
+const int Mod = 1e9 + 7;
+const double Epsilon = 1e-6;
+const int MaxArraySize = 1e7;
+const long long MaxPrimeLimit = 1e12;
+
+template <typename Container>
+void samPrinter(const Container &samContainer) {
+    for (auto samIt = std::begin(samContainer); samIt != std::end(samContainer); ++samIt) {
+        std::cout << *samIt << " ";
+    }
+    std::cout << std::endl;
+}
+
+template <typename Container>
+void samPairPrinter(const Container &samContainer) {
+    for (auto samIt = std::begin(samContainer); samIt != std::end(samContainer); ++samIt) {
+        std::cout << "(" << samIt->first << ", " << samIt->second << ") ";
+    }
+    std::cout << std::endl;
+}
+
+class samMaths {
+public:
+    int samBinMultiply(int samA, int samB) {
+        int samResult = 0;
+        while (samB > 0) {
+            if (samB & 1) {
+                samResult = (samResult + samA) % Mod;
+            }
+            samA = (samA + samA) % Mod;
+            samB >>= 1;
+        }
+        return samResult;
+    }
+
+    double samPower(double samBase, long samExponent) {
+        if (samExponent == 0) {
+            return 1.0;
+        }
+        double samHalf = samPower(samBase, samExponent / 2);
+        if (samExponent % 2 == 0) {
+            return samHalf * samHalf;
+        }
+        return samBase * samHalf * samHalf;
+    }
+
+    int samFactorial(int samN) {
+        int samResult = 1;
+        fl(i, 1, samN + 1) {
+            samResult = (samResult * i) % Mod;
+        }
+        return samResult;
+    }
+
+    double samSquareRoot(int samN) {
+        double samMid, samLeft = 1, samRight = samN;
+        while (samRight - samLeft >= Epsilon) {
+            samMid = samLeft + (samRight - samLeft) / 2;
+            if (samMid * samMid == samN)
+                return samMid;
+            else if (samMid * samMid < samN) {
+                samLeft = samMid;
+            } else {
+                samRight = samMid;
+            }
+        }
+        return samMid;
+    }
+
+    int samIsPrime(long long samN) {
+        vi samPrimeStatus(MaxPrimeLimit, 1);
+        samPrimeStatus[0] = samPrimeStatus[1] = 0;
+        fl(i, 2, MaxPrimeLimit) {
+            if (samPrimeStatus[i] == 1) {
+                for (int j = 2 * i; j < MaxPrimeLimit; j += i) {
+                    samPrimeStatus[j] = 0;
+                }
+            }
+        }
+        return samPrimeStatus[samN];
+    }
+
+    unordered_map<int, int> samFindPrimes(long long samN) {
+        vi samPrimeStatus(samN, 1);
+        samPrimeStatus[0] = samPrimeStatus[1] = 0;
+        unordered_map<int, int> samPrimeFactors;
+        fl(i, 2, samN) {
+            if (samPrimeStatus[i] == 1) {
+                samPrimeFactors[i] = 1;
+                for (int j = 2 * i; j < samN; j += i) {
+                    samPrimeStatus[j] = 0;
+                }
+            } else {
+                samPrimeFactors[i * i] = 0;
+            }
+        }
+        return samPrimeFactors;
+    }
+
+    int samCalculateCombination(int samN, int samR) {
+        return samFactorial(samN) / (samFactorial(samR) * samFactorial(samN - samR));
+    }
+
+    void samFindPrimeFactors(int samN) {
+        vi samPrimeStatus(MaxArraySize, 1);
+        vi samLowestPrime(MaxArraySize, 0), samHighestPrime(MaxArraySize, 0);
+        samPrimeStatus[0] = samPrimeStatus[1] = 0;
+        fl(i, 2, MaxArraySize) {
+            if (samPrimeStatus[i] == 1) {
+                samLowestPrime[i] = samHighestPrime[i] = i;
+                for (int j = 2 * i; j < MaxArraySize; j += i) {
+                    samPrimeStatus[j] = 0;
+                    samHighestPrime[j] = i;
+                    if (samLowestPrime[j] == 0)
+                        samLowestPrime[j] = i;
+                }
+            }
+        }
+        vi samPrimeFactorsList;
+        while (samN > 1) {
+            int samPrimeFactor = samHighestPrime[samN];
+            while (samN % samPrimeFactor == 0) {
+                samN /= samPrimeFactor;
+                samPrimeFactorsList.pb(samPrimeFactor);
+            }
+        }
+        fl(i, 0, samPrimeFactorsList.size()) cout << samPrimeFactorsList[i] << " ";
+        cout << endl;
+    }
+
+    bool samIsPerfectSquare(long double samX) {
+        if (samX >= 0) {
+            long long samSqrtValue = sqrt(samX);
+            return (samSqrtValue * samSqrtValue == samX);
         }
         return false;
     }
 
-    bool parity(int x, int y) {
-        return ((x ^ y) & 1) == 0;
+    bool samHasSameParity(int samX, int samY) {
+        return ((samX ^ samY) & 1) == 0;
     }
 
-    int lenint(int n) {
-        return floor(log10(n) + 1);
+    int samGetIntegerLength(int samN) {
+        return floor(log10(samN) + 1);
     }
 
     template <typename T>
-    void remove(std::vector<T> &v, const T &target) {
-        v.erase(std::remove(all(v), target), v.end());
+    void samRemoveElement(vector<T> &samV, const T &samTarget) {
+        samV.erase(remove(all(samV), samTarget), samV.end());
     }
 
-    // New Utility Functions
+    // Additional Utility Functions
 
-    // Greatest Common Divisor (GCD)
-    int gcd(int a, int b) {
-        while (b) {
-            a %= b;
-            swap(a, b);
+    int samCalculateGCD(int samA, int samB) {
+        while (samB) {
+            samA %= samB;
+            swap(samA, samB);
         }
-        return a;
+        return samA;
     }
 
-    // Least Common Multiple (LCM)
-    int lcm(int a, int b) {
-        return (a / gcd(a, b)) * b;
+    int samCalculateLCM(int samA, int samB) {
+        return (samA / samCalculateGCD(samA, samB)) * samB;
     }
 
-    // Modular Exponentiation
-    int modExp(int x, int y, int p) {
-        int res = 1;
-        x = x % p;
-        while (y > 0) {
-            if (y & 1)
-                res = (res * x) % p;
-            y = y >> 1;
-            x = (x * x) % p;
+    int samModularExponentiation(int samBase, int samExponent, int samMod) {
+        int samResult = 1;
+        samBase = samBase % samMod;
+        while (samExponent > 0) {
+            if (samExponent & 1)
+                samResult = (samResult * samBase) % samMod;
+            samExponent = samExponent >> 1;
+            samBase = (samBase * samBase) % samMod;
         }
-        return res;
+        return samResult;
     }
 
-    // Sieve of Eratosthenes
-    vector<bool> sieve(int n) {
-        vector<bool> is_prime(n + 1, true);
-        is_prime[0] = is_prime[1] = false;
-        for (int i = 2; i * i <= n; i++) {
-            if (is_prime[i]) {
-                for (int j = i * i; j <= n; j += i) {
-                    is_prime[j] = false;
+    vector<bool> samSieveOfEratosthenes(int samN) {
+        vector<bool> samIsPrime(samN + 1, true);
+        samIsPrime[0] = samIsPrime[1] = false;
+        for (int i = 2; i * i <= samN; i++) {
+            if (samIsPrime[i]) {
+                for (int j = i * i; j <= samN; j += i) {
+                    samIsPrime[j] = false;
                 }
             }
         }
-        return is_prime;
+        return samIsPrime;
     }
 
-    // Prime Factorization
-    vector<int> primeFactors(int n) {
-        vector<int> factors;
-        for (int i = 2; i * i <= n; i++) {
-            while (n % i == 0) {
-                factors.pb(i);
-                n /= i;
+    vector<int> samGetPrimeFactors(int samN) {
+        vector<int> samPrimeFactors;
+        while (samN % 2 == 0) {
+            samPrimeFactors.pb(2);
+            samN = samN / 2;
+        }
+        for (int i = 3; i <= sqrt(samN); i += 2) {
+            while (samN % i == 0) {
+                samPrimeFactors.pb(i);
+                samN = samN / i;
             }
         }
-        if (n > 1) factors.pb(n);
-        return factors;
+        if (samN > 2) {
+            samPrimeFactors.pb(samN);
+        }
+        return samPrimeFactors;
     }
 
-    // Finding k-th smallest element
-    int kthSmallest(vector<int> &arr, int k) {
-        nth_element(arr.begin(), arr.begin() + k - 1, arr.end());
-        return arr[k - 1];
-    }
+    void samMergeSort(vector<int> &samArray) {
+        if (samArray.size() <= 1) return;
 
-    // Merge Sort
-    void mergeSort(vector<int> &arr) {
-        if (arr.size() > 1) {
-            int mid = arr.size() / 2;
-            vector<int> left(arr.begin(), arr.begin() + mid);
-            vector<int> right(arr.begin() + mid, arr.end());
-            mergeSort(left);
-            mergeSort(right);
-            merge(arr, left, right);
-        }
-    }
+        auto samMid = samArray.begin() + samArray.size() / 2;
+        vector<int> samLeft(samArray.begin(), samMid);
+        vector<int> samRight(samMid, samArray.end());
 
-private:
-    void merge(vector<int> &arr, vector<int> &left, vector<int> &right) {
-        auto it = arr.begin();
-        auto lit = left.begin(), rit = right.begin();
-        while (lit != left.end() && rit != right.end()) {
-            *it++ = (*lit <= *rit) ? *lit++ : *rit++;
-        }
-        while (lit != left.end()) {
-            *it++ = *lit++;
-        }
-        while (rit != right.end()) {
-            *it++ = *rit++;
-        }
+        samMergeSort(samLeft);
+        samMergeSort(samRight);
+
+        merge(samLeft.begin(), samLeft.end(), samRight.begin(), samRight.end(), samArray.begin());
     }
 };
+
+class samProblemSolver {
+    public:
+    
+};
+signed main() {
+    // Sample code to demonstrate usage
+    samGraph samG(5);
+    samG.samAddEdge(0, 1);
+    samG.samAddEdge(0, 4);
+    samG.samAddEdge(1, 2);
+    samG.samAddEdge(1, 3);
+    samG.samAddEdge(1, 4);
+    samG.samAddEdge(2, 3);
+    samG.samAddEdge(3, 4);
+
+    cout << "BFS starting from vertex 0: ";
+    samG.samBFS(0);
+
+    cout << "DFS starting from vertex 0: ";
+    samG.samDFS(0);
+
+    samMaths samM;
+    cout << "Binary multiplication of 13 and 11: " << samM.samBinMultiply(13, 11) << endl;
+    cout << "Power of 2^10: " << samM.samPower(2, 10) << endl;
+    cout << "Factorial of 5: " << samM.samFactorial(5) << endl;
+    cout << "Square root of 16: " << samM.samSquareRoot(16) << endl;
+    cout << "Is 17 a prime number? " << (samM.samIsPrime(17) ? "Yes" : "No") << endl;
+    cout << "Combination of 5 choose 2: " << samM.samCalculateCombination(5, 2) << endl;
+
+    return 0;
+}
