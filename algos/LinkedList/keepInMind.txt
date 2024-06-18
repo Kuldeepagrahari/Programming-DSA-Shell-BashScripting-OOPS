@@ -1,0 +1,1 @@
+many places i have moved head ptr but never do that , just make a new ptr, assign it head & move that

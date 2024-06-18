@@ -372,21 +372,6 @@ class samMaths
         }
         return samPrimeFactors;
     }
-
-    void samMergeSort(vector<int> &samArray)
-    {
-        if (samArray.size() <= 1)
-            return;
-
-        auto samMid = samArray.begin() + samArray.size() / 2;
-        vector<int> samLeft(samArray.begin(), samMid);
-        vector<int> samRight(samMid, samArray.end());
-
-        samMergeSort(samLeft);
-        samMergeSort(samRight);
-
-        merge(samLeft.begin(), samLeft.end(), samRight.begin(), samRight.end(), samArray.begin());
-    }
 };
 
 class samProblemSolver
@@ -396,52 +381,16 @@ class samProblemSolver
            samMaths ramanujan;
 
     public:
-       int solve ( int a, int b){
+       void solve (){
+          
           vi v = {1,2,3};
           samPrinter(v);
-          return ramanujan.samModularExponentiation(a,b,Mod);
+          cout <<  ramanujan.samModularExponentiation(a,b,Mod);
        }
        
 };
 int main()
 {
-    // Sample code to demonstrate usage
-    // samGraph samG(5);
-    // samG.samAddEdge(0, 1);
-    // samG.samAddEdge(0, 4);
-    // samG.samAddEdge(1, 2);
-    // samG.samAddEdge(1, 3);
-    // samG.samAddEdge(1, 4);
-    // samG.samAddEdge(2, 3);
-    // samG.samAddEdge(3, 4);
-
-    // cout << "BFS starting from vertex 0: ";
-    // samG.samBFS(0);
-
-    // cout << "DFS starting from vertex 0: ";
-    // samG.samDFS(0);
-
-    // samMaths samM;
-    // cout << "Binary multiplication of 13 and 11: " << samM.samBinMultiply(13, 11) << endl;
-    // cout << "Power of 2^10: " << samM.samPower(2, 10) << endl;
-    // cout << "Factorial of 5: " << samM.samFactorial(5) << endl;
-    // cout << "Square root of 16: " << samM.samSquareRoot(16) << endl;
-    // cout << "Is 17 a prime number? " << (samM.samIsPrime(17) ? "Yes" : "No") << endl;
-    // cout << "Combination of 5 choose 2: " << samM.samCalculateCombination(5, 2) << endl;
-    // -------------------------------------------------------------------------------------------
-
-    samProblemSolver god;
-
-    // ------------------------------------------------------------------------------------------------
-    int n = 34;
-    vi v;
-    samPrinter(v);
-    cout << god.solve(2,4);
-
-
-
-
-    
-
-    
+     samProblemSolver god;
+     god.solve();   
 }

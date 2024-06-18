@@ -1,39 +1,25 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-int select(int arr[], int i, int n) {
-    int mini = i;
-   
-    for (int j = i + 1; j < n; j++) {
-        if (arr[j] < arr[mini]) {
-            mini = j;
+ void insert(int arr[], int i)
+    {
+        //code here
+        int j = i - 1;
+        int next_min = arr[i];
+        while ( j >= 0 && arr[j] > next_min ){
+            arr[j + 1] = arr[j];
+            j--;
         }
+        arr[j+1] = next_min;
+        // for ( int i  = 0; i  < n ; i ++ ) cout << arr[i] << " ";
+        // cout << endl;
     }
-    return mini;
-}
-
-void selectionSort(int arr[], int n) {
-    for (int i = 0; i < n - 1; i++) {
-        int minIndex = select(arr, i, n);
-        swap(arr[i], arr[minIndex]);
+    
+    //Function to sort the array using insertion sort algorithm.
+    void insertionSort(int arr[], int n)
+    {
+        //code here
+        for ( int i = 1 ; i < n ; i ++ ){
+            
+            insert(arr, i);
+        }
+        
+        
     }
-}
-
-int main() {
-    int arr[] = {1, 3, 4, 7, 9};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    selectionSort(arr, n);
-    cout << "Sorted array: ";
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << " ";
-    }
-
-    // experiment
-    // int elem = arr[1];
-    // swap(arr[0], elem);
-    // for (int i = 0; i < n; i++) {
-    //     cout << arr[i] << " ";
-    // }
-    // cout << endl;
-    // failed
-}

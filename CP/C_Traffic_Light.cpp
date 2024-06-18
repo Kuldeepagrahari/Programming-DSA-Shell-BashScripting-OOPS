@@ -13,7 +13,8 @@ using namespace std;
 #define pb push_back
 #define ppb pop_back
 #define fl(i, a, b) for (int i = a; i < b; i++)
-
+#define second S
+#define first F
 #define LL long long
 
 class samGraph
@@ -359,33 +360,13 @@ public:
     }
 };
  
-class samBinarySearch{
-    public:
-
-    int justLessThanOrEqual ( vector<LL> &v, int l, int r, int tar ){
-        int ans = -1;
-        while(r >= l ){
-        int mid = l + (r - l)/2;
-
-        if ( v[mid] > tar ){
-            r = mid - 1;
-        }
-        else if ( v[mid] == tar )return mid;
-        else {
-            ans = mid;
-            l = mid + 1;
-        }
-       }
-       return ans;
-    }
-   
-};
+ 
 class comp{
 public:
     bool operator()(pair<int,int> p1, pair<int,int> p2 ){
-       if (p1.first != p2.first)
+       if (p1.F != p2.F)
             return p1.first < p2.first; 
-       return p1.second > p2.second; 
+       return p1.S > p2.S; 
     }
 };
 
@@ -394,7 +375,6 @@ class samProblemSolver
 private:
     samGraph G();
     samMaths ramanujan;
-    samBinarySearch aryabhatt;
 
 public:
     void solve()
@@ -405,41 +385,30 @@ public:
         while (t--)
         {
             int n, a, b, x, y, z, m, jaiShreeRam = 0;
-            cin >> n;
-            vi v(n);
-            fl(i,0,n)cin >> v[i];
+            char cc;
+            cin >> n >> cc;
+            string s;
+            cin >> s;
+            s += s;
+            int ans = 0;
 
-            vpii vp;
-            fl(i,0,n)vp.pb({v[i],i});
-
-            sort(all(vp));
-
-            vector<LL> pre(n+1,0);
-
-            fl(i,1,n+1){
-              pre[i] = pre[i-1] + vp[i-1].first;
+            vector<int> ng(2*n+1);
+            ng[2*n] = -1;
+            for ( int i =  2*n-1; i >= 0; i-- ){
+                if ( s[i] == 'g') ng[i] = i;
+                else{
+                   ng[i] = ng[i+1];
+                }
             }
-            // samPrinter(pre);
-            vi ans(n);
-            int k = 0 , j = 0;
-            int cur_score = 0;
-            for ( int i = 1 ; i < n; i ++ ){
-               cur_score += vp[j].first;
-               if ( cur_score < vp[i].first ){
-                ans[vp[k].second] = j ;
-                j++;
-                k++;
-               }
-               else {
-                  j++;
-               }
+            // samPrinter(ng);
+            for (int i = 0; i < n; i++)
+            {
+                if (s[i] == cc)
+                {
+                   ans = max(ans, ng[i]-i);
+                }
             }
-
-          
-            // samPairPrinter(vp);
-            samPrinter(ans);
-            
-
+            cout << ans << endl;
             // vi va(n);
             // vi vb(n) ;
             // fl(i,0,n)cin >> va[i];

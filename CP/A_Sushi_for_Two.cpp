@@ -400,54 +400,32 @@ public:
     void solve()
     {
 
-        int t;
-        cin >> t;
-        while (t--)
-        {
+        // int t;
+        // cin >> t;
+        // while (t--)
+        // {
             int n, a, b, x, y, z, m, jaiShreeRam = 0;
             cin >> n;
             vi v(n);
             fl(i,0,n)cin >> v[i];
-
-            vpii vp;
-            fl(i,0,n)vp.pb({v[i],i});
-
-            sort(all(vp));
-
-            vector<LL> pre(n+1,0);
-
-            fl(i,1,n+1){
-              pre[i] = pre[i-1] + vp[i-1].first;
-            }
-            // samPrinter(pre);
-            vi ans(n);
-            int k = 0 , j = 0;
-            int cur_score = 0;
-            for ( int i = 1 ; i < n; i ++ ){
-               cur_score += vp[j].first;
-               if ( cur_score < vp[i].first ){
-                ans[vp[k].second] = j ;
-                j++;
-                k++;
-               }
-               else {
-                  j++;
-               }
-            }
-
-          
-            // samPairPrinter(vp);
-            samPrinter(ans);
             
+            int c1 = 0, c2 = 0;
 
-            // vi va(n);
-            // vi vb(n) ;
-            // fl(i,0,n)cin >> va[i];
-            // fl(i,0,n)cin >> vb[i];
+            fl(i,0,n){
 
-            // samPrinter(v);
-            // cout << jaiShreeRam << endl;
-        }
+                if ( v[i] == 1 )c1++;
+                else c2++;
+                jaiShreeRam = max ( jaiShreeRam, 2*min(c1,c2));
+              
+                if ( i+1 < n && v[i] == 1 && v[i+1] == 2 && c2 > 0 )c2 = 0;
+                else if ( i+1 < n && v[i+1] == 1 && v[i] == 2 && c1 > 0 ) c1 = 0;
+               
+
+
+            }
+            cout << jaiShreeRam << endl;
+
+        // }
     }
 };
 int main()

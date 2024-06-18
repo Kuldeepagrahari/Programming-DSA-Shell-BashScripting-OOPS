@@ -13,7 +13,8 @@ using namespace std;
 #define pb push_back
 #define ppb pop_back
 #define fl(i, a, b) for (int i = a; i < b; i++)
-
+#define second ss
+#define first ff
 #define LL long long
 
 class samGraph
@@ -108,7 +109,7 @@ void samPairPrinter(const Container &samContainer)
 
 class samMaths
 {
-public:
+  public:
     int samBinMultiply(int samA, int samB)
     {
         int samResult = 0;
@@ -207,21 +208,19 @@ public:
         }
         return samPrimeFactors;
     }
-
+ 
     int samCalculateNcR(int n, int r)
     {
-        int maxi = max(r, n - r);
-        int mini = min(r, n - r);
+        int maxi = max ( r, n-r );
+        int mini = min ( r, n-r );
 
         LL num = 1;
-        for (int i = n; i >= 1 + maxi; i--)
-        {
+        for ( int i = n ; i >= 1 + maxi ; i--  ){
             num *= i;
         }
 
         LL deno = 1;
-        for (int i = 1; i <= mini; i++)
-        {
+        for ( int i = 1; i <= mini; i++ ){
             deno *= i;
         }
 
@@ -357,103 +356,101 @@ public:
         }
         return samPrimeFactors;
     }
-};
- 
-class samBinarySearch{
-    public:
 
-    int justLessThanOrEqual ( vector<LL> &v, int l, int r, int tar ){
-        int ans = -1;
-        while(r >= l ){
-        int mid = l + (r - l)/2;
+    void samMergeSort(vector<int> &samArray)
+    {
+        if (samArray.size() <= 1)
+            return;
 
-        if ( v[mid] > tar ){
-            r = mid - 1;
-        }
-        else if ( v[mid] == tar )return mid;
-        else {
-            ans = mid;
-            l = mid + 1;
-        }
-       }
-       return ans;
-    }
-   
-};
-class comp{
-public:
-    bool operator()(pair<int,int> p1, pair<int,int> p2 ){
-       if (p1.first != p2.first)
-            return p1.first < p2.first; 
-       return p1.second > p2.second; 
+        auto samMid = samArray.begin() + samArray.size() / 2;
+        vector<int> samLeft(samArray.begin(), samMid);
+        vector<int> samRight(samMid, samArray.end());
+
+        samMergeSort(samLeft);
+        samMergeSort(samRight);
+
+        merge(samLeft.begin(), samLeft.end(), samRight.begin(), samRight.end(), samArray.begin());
     }
 };
 
 class samProblemSolver
 {
-private:
-    samGraph G();
-    samMaths ramanujan;
-    samBinarySearch aryabhatt;
+    private:
+           samGraph G();
+           samMaths ramanujan;
 
-public:
-    void solve()
-    {
+    public:
+       void solve (){
 
-        int t;
-        cin >> t;
-        while (t--)
-        {
-            int n, a, b, x, y, z, m, jaiShreeRam = 0;
-            cin >> n;
-            vi v(n);
-            fl(i,0,n)cin >> v[i];
+         int n;
+         cin >> n;
+         vi v(n);
+         fl(i,0,n) cin >> v[i];
 
-            vpii vp;
-            fl(i,0,n)vp.pb({v[i],i});
-
-            sort(all(vp));
-
-            vector<LL> pre(n+1,0);
-
-            fl(i,1,n+1){
-              pre[i] = pre[i-1] + vp[i-1].first;
+         mii mp;
+         vi lo(200001, -1);
+         int j = 0;
+         int ans = 0;
+         fl(i,0,n){
+            if ( mp[v[i]] == 1 ){
+                ans = max( ans, i - j );
+               j = lo[v[i]] + 1;
+               lo[v[i]] = i;
+            //    yes;
             }
-            // samPrinter(pre);
-            vi ans(n);
-            int k = 0 , j = 0;
-            int cur_score = 0;
-            for ( int i = 1 ; i < n; i ++ ){
-               cur_score += vp[j].first;
-               if ( cur_score < vp[i].first ){
-                ans[vp[k].second] = j ;
-                j++;
-                k++;
-               }
-               else {
-                  j++;
-               }
+            else {
+                mp[v[i]]++;
+                lo[v[i]] = i;
             }
+        //    cout << j << " " << i << " " << ans<<endl;
+           } 
 
+           
+         ans = max ( ans, n - j);
+        cout << ans << endl;
           
-            // samPairPrinter(vp);
-            samPrinter(ans);
-            
-
-            // vi va(n);
-            // vi vb(n) ;
-            // fl(i,0,n)cin >> va[i];
-            // fl(i,0,n)cin >> vb[i];
-
-            // samPrinter(v);
-            // cout << jaiShreeRam << endl;
-        }
-    }
+       }
+       
 };
 int main()
 {
-
+    
     samProblemSolver god;
-
+    
     god.solve();
+
+    // ------------------------------------------------------------------------------------------------
+    // Sample code to demonstrate usage
+    // samGraph samG(5);
+    // samG.samAddEdge(0, 1);
+    // samG.samAddEdge(0, 4);
+    // samG.samAddEdge(1, 2);
+    // samG.samAddEdge(1, 3);
+    // samG.samAddEdge(1, 4);
+    // samG.samAddEdge(2, 3);
+    // samG.samAddEdge(3, 4);
+
+    // cout << "BFS starting from vertex 0: ";
+    // samG.samBFS(0);
+
+    // cout << "DFS starting from vertex 0: ";
+    // samG.samDFS(0);
+
+    // samMaths samM;
+    // cout << "Binary multiplication of 13 and 11: " << samM.samBinMultiply(13, 11) << endl;
+    // cout << "Power of 2^10: " << samM.samPower(2, 10) << endl;
+    // cout << "Factorial of 5: " << samM.samFactorial(5) << endl;
+    // cout << "Square root of 16: " << samM.samSquareRoot(16) << endl;
+    // cout << "Is 17 a prime number? " << (samM.samIsPrime(17) ? "Yes" : "No") << endl;
+    // cout << "Combination of 5 choose 2: " << samM.samCalculateCombination(5, 2) << endl;
+    // -------------------------------------------------------------------------------------------
+
+
+
+
+
+
+    
+
+    
 }

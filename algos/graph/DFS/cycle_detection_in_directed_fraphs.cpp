@@ -2,7 +2,7 @@
    bool dfs ( int u, vector<int> adj[], vector<int> &vis, 
    vector<int> &callStack ){
         vis[u] = 1;
-        callStack[u] = 1;
+        callStack[u] = 1;// for tracking in each compo
       
         for ( auto v : adj[u] ){
             // chunki jab ek compo poora hua aur hame cycle nhi mila 
