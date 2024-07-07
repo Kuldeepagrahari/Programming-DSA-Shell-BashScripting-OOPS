@@ -41,7 +41,7 @@ void merge(int a[],int p,int q,int r){
         if(L[i]<=R[k])a[j++]=L[i++];
         else a[j++]=R[k++];
     }
-print(L,3);
+// print(L,3);
 }
 void mergeSort(int a[],int p,int r){
     if(p<r){
