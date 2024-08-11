@@ -8,6 +8,7 @@
         "limits": "cpp",
         "valarray": "cpp",
         "vector": "cpp",
-        "cstdlib": "cpp"
+        "cstdlib": "cpp",
+        "complex": "cpp"
     }
 }
