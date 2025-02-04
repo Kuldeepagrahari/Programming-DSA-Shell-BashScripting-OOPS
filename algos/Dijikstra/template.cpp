@@ -1,29 +1,65 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <climits>  // For INT_MIN
+
 using namespace std;
 
-void dijikstra(vector<vector<int>> edges, int V)
-{
+int getMinOperations(int n, int m, const vector<int>& change, vector<int>& arr) {
+    int operations = 0;
 
-    vector<int> adj[V];
-
-    for (int i = 0; i < edges.size(); i++)
-    {
-        /* The lines `adj[edges[i][0]].push_back(edges[i][2]);` and
-        `adj[edges[i][1]].push_back(edges[0][2]);` are adding edges to the adjacency list
-        representation of a graph. */
-        adj[edges[i][0]].push_back(edges[i][2]);
-        adj[edges[i][1]].push_back(edges[0][2]);
+    // Process the change array
+    for (int i = 0; i < n; i++) {
+        int index = change[i] - 1;  // Convert to 0-based index
+        if (index >= 0 && index < m) {
+            if (arr[index] > 0) {
+                arr[index]--;  // Decrease the value at arr[index]
+                operations++;
+            }
+            if (arr[index] == 0) {
+                arr[index] = INT_MIN;  // Mark as "processed"
+                operations++;
+            }
+        }
     }
 
-    int dist[V];
+    // Check if all elements in arr have been processed
+    for (int i = 0; i < m; i++) {
+        if (arr[i] != INT_MIN) {
+            return -1;  // If any element is not processed, return -1
+        }
+    }
 
-    for ()
+    return operations;
 }
-int main()
-{
 
-    vector<vector<int>> edges = {{1, 2, 1}, {2, 3, 2}, {3, 4, 3}, {4, 5, 4}, {5, 6, 5}};
-    int V = 6;
+int main() {
+    int n, m;
+    
+    // Input the size of the arrays
+    cout << "Enter the size of the change array (n): ";
+    cin >> n;
+    cout << "Enter the size of the arr array (m): ";
+    cin >> m;
 
-    dijikstra(edges, V);
+    vector<int> change(n), arr(m);
+
+    // Input the change array
+    cout << "Enter the change array: ";
+    for (int i = 0; i < n; i++) {
+        cin >> change[i];
+    }
+
+    // Input the arr array
+    cout << "Enter the arr array: ";
+    for (int i = 0; i < m; i++) {
+        cin >> arr[i];
+    }
+
+    // Get the minimum operations
+    int result = getMinOperations(n, m, change, arr);
+
+    // Output the result
+    cout << "Minimum operations: " << result << endl;
+
+    return 0;
 }

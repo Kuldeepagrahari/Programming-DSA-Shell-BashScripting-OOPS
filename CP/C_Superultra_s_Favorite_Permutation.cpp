@@ -84,7 +84,7 @@ public:
 const int Mod = 1e9 + 7;
 const double Epsilon = 1e-6;
 const int MaxArraySize = 1e7;
-const int MaxPrimeLimit = 1e9;
+const int MaxPrimeLimit = 1e7;
 
 template <typename Container>
 void samPrinter(const Container &samContainer)
@@ -168,7 +168,7 @@ public:
         return samMid;
     }
 
-    int samIsPrime(int samN)
+    vector<int> samIsPrime()
     {
         vi samPrimeStatus(MaxPrimeLimit, 1);
         samPrimeStatus[0] = samPrimeStatus[1] = 0;
@@ -182,7 +182,7 @@ public:
                 }
             }
         }
-        return samPrimeStatus[samN];
+        return samPrimeStatus;
     }
 
     unordered_map<int, int> samFindPrimes(int samN)
@@ -402,12 +402,35 @@ public:
 
         int t;
         cin >> t;
+        vector<int> isPrime = ramanujan.samIsPrime();
         while (t--)
         {
             int n, a, b, x, y, z, m, jaiShreeRam = 0;
             cin >> n;
-            vi v(n);
-            fl(i,0,n)cin >> v[i];
+            vi ans(n);
+            int j = 0, k = 0;
+            fl(i,1,n+1){
+                if ( i % 2 != 0 )ans[j++] = i;
+                else ans[n - n/2 + k++] = i;
+            }
+            int f = 0;
+
+            for ( int i = n/2; i <n; i++ ){
+                if (!isPrime[ans[i] + 2*(n/2) - 1]){
+                  swap(ans[n-n/2-1], ans[i]);
+                  f = 1;
+                  break;
+                }
+            }
+            if ( f == 0 ) cout << "-1\n";
+            else
+            samPrinter(ans);
+            // vi v(n); mii mp;
+            // fl(i,0,n){cin >> v[i];}
+            
+            // cout << "1" << " " << (n-2) << endl;
+      
+
 
             // vpii vp;
             // fl(i,0,n)vp.pb({v[i],i});

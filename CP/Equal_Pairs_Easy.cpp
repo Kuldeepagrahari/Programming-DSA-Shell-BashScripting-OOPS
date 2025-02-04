@@ -15,6 +15,40 @@ using namespace std;
 #define fl(i, a, b) for (int i = a; i < b; i++)
 
 #define LL long long
+const int Mod = 1e9 + 7;
+const double Epsilon = 1e-6;
+const int MaxArraySize = 1e7;
+const int MaxPrimeLimit = 1e9;
+
+template <typename Container>
+void samPrinter(const Container &samContainer)
+{
+    for (auto samIt = begin(samContainer); samIt != end(samContainer); ++samIt)
+    {
+        cout << *samIt << " ";
+    }
+    cout << endl;
+}
+
+template <typename Container>
+void samPairPrinter(const Container &samContainer)
+{
+    for (auto samIt = begin(samContainer); samIt != end(samContainer); ++samIt)
+    {
+        cout << "(" << samIt->first << ", " << samIt->second << ") ";
+    }
+    cout << endl;
+}
+
+template <typename Container>
+void samSetPrinter(const Container &samContainer)
+{
+    for (auto samIt = begin(samContainer); samIt != end(samContainer); samIt++)
+    {
+        cout << *samIt << " ";
+    }
+    cout << endl;
+}
 
 class samGraph
 {
@@ -80,31 +114,6 @@ public:
         cout << endl;
     }
 };
-
-const int Mod = 1e9 + 7;
-const double Epsilon = 1e-6;
-const int MaxArraySize = 1e7;
-const int MaxPrimeLimit = 1e9;
-
-template <typename Container>
-void samPrinter(const Container &samContainer)
-{
-    for (auto samIt = std::begin(samContainer); samIt != std::end(samContainer); ++samIt)
-    {
-        std::cout << *samIt << " ";
-    }
-    std::cout << std::endl;
-}
-
-template <typename Container>
-void samPairPrinter(const Container &samContainer)
-{
-    for (auto samIt = std::begin(samContainer); samIt != std::end(samContainer); ++samIt)
-    {
-        std::cout << "(" << samIt->first << ", " << samIt->second << ") ";
-    }
-    std::cout << std::endl;
-}
 
 class samMaths
 {
@@ -185,12 +194,13 @@ public:
         return samPrimeStatus[samN];
     }
 
-    unordered_map<int, int> samFindPrimes(int samN)
+    mii samAllPrimes(int samN)
     {
         vi samPrimeStatus(samN, 1);
-        samPrimeStatus[0] = samPrimeStatus[1] = 0;
-        unordered_map<int, int> samPrimeFactors;
-        fl(i, 2, samN)
+        samPrimeStatus[0] = 0;
+        samPrimeStatus[1] = 0;
+        map<int, int> samPrimeFactors;
+        for (int i = 2; i * i < samN; i++)
         {
             if (samPrimeStatus[i] == 1)
             {
@@ -200,12 +210,31 @@ public:
                     samPrimeStatus[j] = 0;
                 }
             }
-            else
-            {
-                samPrimeFactors[i * i] = 0;
-            }
+            // else
+            // {
+            //     samPrimeFactors[i * i] = 0;
+            // }
         }
         return samPrimeFactors;
+    }
+
+    vi samAllPrimes2(int samN)
+    {
+        vi samPrimer(samN, 1);
+        samPrimer[0] = samPrimer[1] = 0;
+
+        for (int i = 0; i * i <= samN; i++)
+        {
+            if (samPrimer[i] == 1)
+            {
+                for (int j = 2 * i; j < samN; j += i)
+                {
+                    samPrimer[j] = 0;
+                }
+            }
+        }
+
+        return samPrimer;
     }
 
     int samCalculateNcR(int n, int r)
@@ -358,34 +387,40 @@ public:
         return samPrimeFactors;
     }
 };
- 
-class samBinarySearch{
-    public:
 
-    int justLessThanOrEqual ( vector<LL> &v, int l, int r, int tar ){
-        int ans = -1;
-        while(r >= l ){
-        int mid = l + (r - l)/2;
-
-        if ( v[mid] > tar ){
-            r = mid - 1;
-        }
-        else if ( v[mid] == tar )return mid;
-        else {
-            ans = mid;
-            l = mid + 1;
-        }
-       }
-       return ans;
-    }
-   
-};
-class comp{
+class samBinarySearch
+{
 public:
-    bool operator()(pair<int,int> p1, pair<int,int> p2 ){
-       if (p1.first != p2.first)
-            return p1.first < p2.first; 
-       return p1.second > p2.second; 
+    int justLessThanOrEqual(vector<LL> &v, int l, int r, int tar)
+    {
+        int ans = -1;
+        while (r >= l)
+        {
+            int mid = l + (r - l) / 2;
+
+            if (v[mid] > tar)
+            {
+                r = mid - 1;
+            }
+            else if (v[mid] == tar)
+                return mid;
+            else
+            {
+                ans = mid;
+                l = mid + 1;
+            }
+        }
+        return ans;
+    }
+};
+class comp
+{
+public:
+    bool operator()(pair<int, int> p1, pair<int, int> p2)
+    {
+        if (p1.first != p2.first)
+            return p1.first < p2.first;
+        return p1.second > p2.second;
     }
 };
 
@@ -397,40 +432,64 @@ private:
     samBinarySearch aryabhatt;
 
 public:
+    long long calculateMedian(vector<long long> &v)
+    {
+        sort(v.begin(), v.end());
+        int n = v.size();
+        return v[(n - 1) / 2]; // For 1-based index it's (n+1)/2, but in 0-based index it's (n-1)/2
+    }
+
     void solve()
     {
-
         int t;
         cin >> t;
+
+        //    vi primer = ramanujan.samAllPrimes2(1e6);
+        //    vi primes (1e6);
+
+        //    for ( int i = 1e6-1; i >= 0; i-- ){
+        //        if ( primer[i] == 1 ){
+        //         primes[i] = i;
+        //        }
+        //        else primes[i] = primes[i+1];
+        //    }
+
+        // us value se just bada / vo khud prime h ya nhi
+
+        //    samPrinter(primes);
         while (t--)
         {
-            int n, a, b, x, y, z, m, jaiShreeRam = 0;
-            cin >> n;
-            vi v(n);
-            fl(i,0,n)cin >> v[i];
+            int n, m,k ;
+             cin >> n ;
+             vi v(n);
+             fl(i,0,n)cin >> v[i];
+             mii mp;
+             fl(i,0,n){if(v[i] != 0 )mp[v[i]]++;}
+             int mx = 0, val;
+             for(auto it: mp){
+                if(it.second > mx){
+                    mx = it.second;
+                    val = it.first;
+                }
+              
+            } 
+            int c0 = 0;
+            fl(i,0,n){
+                if(v[i] == 0)c0++;
+            }  
+            mp[val] += c0;
+            int uttar = 0;
+            for(auto it: mp){
+               uttar += (it.second)*(it.second - 1)/2;
+              
+            } 
+            cout << uttar << endl;
 
-            // vpii vp;
-            // fl(i,0,n)vp.pb({v[i],i});
-
-            // sort(all(vp));
-
-            // vector<LL> pre(n+1,0);
-
-         
-            // samPrinter(pre);
-          
-          
-            // samPairPrinter(vp);
-            // samPrinter(ans);
             
 
-            // vi va(n);
-            // vi vb(n) ;
-            // fl(i,0,n)cin >> va[i];
-            // fl(i,0,n)cin >> vb[i];
 
-            // samPrinter(v);
-            // cout << jaiShreeRam << endl;
+            
+              
         }
     }
 };

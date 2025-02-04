@@ -15,6 +15,40 @@ using namespace std;
 #define fl(i, a, b) for (int i = a; i < b; i++)
 
 #define LL long long
+const int Mod = 1e9 + 7;
+const double Epsilon = 1e-6;
+const int MaxArraySize = 1e7;
+const int MaxPrimeLimit = 1e9;
+
+template <typename Container>
+void samPrinter(const Container &samContainer)
+{
+    for (auto samIt = begin(samContainer); samIt != end(samContainer); ++samIt)
+    {
+        cout << *samIt << " ";
+    }
+    cout << endl;
+}
+
+template <typename Container>
+void samPairPrinter(const Container &samContainer)
+{
+    for (auto samIt = begin(samContainer); samIt != end(samContainer); ++samIt)
+    {
+        cout << "(" << samIt->first << ", " << samIt->second << ") ";
+    }
+    cout << endl;
+}
+
+template <typename Container>
+void samSetPrinter(const Container &samContainer)
+{
+    for (auto samIt = begin(samContainer); samIt != end(samContainer); samIt++)
+    {
+        cout << *samIt << " ";
+    }
+    cout << endl;
+}
 
 class samGraph
 {
@@ -80,31 +114,6 @@ public:
         cout << endl;
     }
 };
-
-const int Mod = 1e9 + 7;
-const double Epsilon = 1e-6;
-const int MaxArraySize = 1e7;
-const int MaxPrimeLimit = 1e9;
-
-template <typename Container>
-void samPrinter(const Container &samContainer)
-{
-    for (auto samIt = std::begin(samContainer); samIt != std::end(samContainer); ++samIt)
-    {
-        std::cout << *samIt << " ";
-    }
-    std::cout << std::endl;
-}
-
-template <typename Container>
-void samPairPrinter(const Container &samContainer)
-{
-    for (auto samIt = std::begin(samContainer); samIt != std::end(samContainer); ++samIt)
-    {
-        std::cout << "(" << samIt->first << ", " << samIt->second << ") ";
-    }
-    std::cout << std::endl;
-}
 
 class samMaths
 {
@@ -185,12 +194,13 @@ public:
         return samPrimeStatus[samN];
     }
 
-    unordered_map<int, int> samFindPrimes(int samN)
+    mii samAllPrimes(int samN)
     {
         vi samPrimeStatus(samN, 1);
-        samPrimeStatus[0] = samPrimeStatus[1] = 0;
-        unordered_map<int, int> samPrimeFactors;
-        fl(i, 2, samN)
+        samPrimeStatus[0] = 0;
+        samPrimeStatus[1] = 0;
+        map<int, int> samPrimeFactors;
+        for (int i = 2; i * i < samN; i++)
         {
             if (samPrimeStatus[i] == 1)
             {
@@ -200,12 +210,31 @@ public:
                     samPrimeStatus[j] = 0;
                 }
             }
-            else
-            {
-                samPrimeFactors[i * i] = 0;
-            }
+            // else
+            // {
+            //     samPrimeFactors[i * i] = 0;
+            // }
         }
         return samPrimeFactors;
+    }
+
+    vi samAllPrimes2(int samN)
+    {
+        vi samPrimer(samN, 1);
+        samPrimer[0] = samPrimer[1] = 0;
+
+        for (int i = 0; i * i <= samN; i++)
+        {
+            if (samPrimer[i] == 1)
+            {
+                for (int j = 2 * i; j < samN; j += i)
+                {
+                    samPrimer[j] = 0;
+                }
+            }
+        }
+
+        return samPrimer;
     }
 
     int samCalculateNcR(int n, int r)
@@ -358,34 +387,40 @@ public:
         return samPrimeFactors;
     }
 };
- 
-class samBinarySearch{
-    public:
 
-    int justLessThanOrEqual ( vector<LL> &v, int l, int r, int tar ){
-        int ans = -1;
-        while(r >= l ){
-        int mid = l + (r - l)/2;
-
-        if ( v[mid] > tar ){
-            r = mid - 1;
-        }
-        else if ( v[mid] == tar )return mid;
-        else {
-            ans = mid;
-            l = mid + 1;
-        }
-       }
-       return ans;
-    }
-   
-};
-class comp{
+class samBinarySearch
+{
 public:
-    bool operator()(pair<int,int> p1, pair<int,int> p2 ){
-       if (p1.first != p2.first)
-            return p1.first < p2.first; 
-       return p1.second > p2.second; 
+    int justLessThanOrEqual(vector<LL> &v, int l, int r, int tar)
+    {
+        int ans = -1;
+        while (r >= l)
+        {
+            int mid = l + (r - l) / 2;
+
+            if (v[mid] > tar)
+            {
+                r = mid - 1;
+            }
+            else if (v[mid] == tar)
+                return mid;
+            else
+            {
+                ans = mid;
+                l = mid + 1;
+            }
+        }
+        return ans;
+    }
+};
+class comp
+{
+public:
+    bool operator()(pair<int, int> p1, pair<int, int> p2)
+    {
+        if (p1.first != p2.first)
+            return p1.first < p2.first;
+        return p1.second > p2.second;
     }
 };
 
@@ -397,41 +432,78 @@ private:
     samBinarySearch aryabhatt;
 
 public:
+    long long calculateMedian(vector<long long> &v)
+    {
+        sort(v.begin(), v.end());
+        int n = v.size();
+        return v[(n - 1) / 2]; // For 1-based index it's (n+1)/2, but in 0-based index it's (n-1)/2
+    }
+    bool is1100 (int i, string s){
+        bool f = false;
+        if ( s[i] == '1'){
+            if (s[i+1] == '1')if ( s[i+2] == '0' && s[i+3] == '0')f = true;
+            else if( i > 0 && s[i-1] == '1' && s[i+1] == '0' && s[i+2] == '0')f = true;
+        }else {
+            if ( i > 2 && s[i+1] == '0' && s[i-1] == '1' && s[i-2] == '1')f = true;
+            else if(i > 3 && s[i-1] == '0' && s[i-2] == '1' && s[i-3] == '1')f = true;
+        }
+        return false;
+    }
     void solve()
     {
-
-        int t;
-        cin >> t;
-        while (t--)
-        {
-            int n, a, b, x, y, z, m, jaiShreeRam = 0;
-            cin >> n;
-            vi v(n);
-            fl(i,0,n)cin >> v[i];
-
-            // vpii vp;
-            // fl(i,0,n)vp.pb({v[i],i});
-
-            // sort(all(vp));
-
-            // vector<LL> pre(n+1,0);
-
+       int t;
+       cin >> t;
+       while ( t-- ){
+        int n, k, q;
+        string s;
+        cin >> s;
+        cin >> q;
+        int l = s.length();
+        vector<string> ans(q);
+      
+        if ( l < 4 ){fl(i,0,q){ans[i] = "NO";int x, y; cin >> x >> y;}}
+        else{
+            int c = 0;
+        fl(i, 0, l-4){
+            string ss = "";
+            ss += s[i];
+            ss += s[i+1];
+            ss += s[i+2];
+            ss += s[i+3];
          
-            // samPrinter(pre);
-          
-          
-            // samPairPrinter(vp);
-            // samPrinter(ans);
-            
-
-            // vi va(n);
-            // vi vb(n) ;
-            // fl(i,0,n)cin >> va[i];
-            // fl(i,0,n)cin >> vb[i];
-
-            // samPrinter(v);
-            // cout << jaiShreeRam << endl;
+           
+         if (ss == "1100"){
+           c++;
+        
+         }
         }
+     
+        
+        fl(i,0,q){
+            int x, y;
+            char ch;
+            cin >> x >> ch;
+          if ( is1100(x-1, s) && s[x-1] != ch){
+            c--;
+          }
+          s[x - 1] = ch ;
+          if ( is1100(x-1, s)&& s[x-1]!= ch ){
+            c++;
+          }
+      
+          if ( c > 0)ans[i] = "YES";
+          else ans[i] = "NO";
+        }
+        }
+
+
+      
+              
+             
+        for ( int i = 0 ; i < q; i++ )cout << ans[i] << endl;
+  
+        
+    }
     }
 };
 int main()

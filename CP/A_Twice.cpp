@@ -406,8 +406,13 @@ public:
         {
             int n, a, b, x, y, z, m, jaiShreeRam = 0;
             cin >> n;
-            vi v(n);
-            fl(i,0,n)cin >> v[i];
+            vi v(n); mii mp;
+            fl(i,0,n){cin >> v[i];mp[v[i]]++;}
+            int ans = 0;
+            for ( auto it: mp )ans += it.second / 2;
+            cout << ans << endl;
+           
+
 
             // vpii vp;
             // fl(i,0,n)vp.pb({v[i],i});

@@ -406,8 +406,23 @@ public:
         {
             int n, a, b, x, y, z, m, jaiShreeRam = 0;
             cin >> n;
-            vi v(n);
-            fl(i,0,n)cin >> v[i];
+            vi v(n); mii mp;
+            fl(i,0,n){cin >> v[i];}
+            
+            set<int>st;
+            for (int i = 0; i < n; i++){
+
+                if ( (n-2) % v[i] == 0 ){
+                    if ( st.count((n-2)/v[i])){
+                        cout << v[i] << " " << (n-2)/v[i] << endl;
+                        break;
+                    }
+                    st.insert(v[i]);
+                }
+            }
+            // cout << "1" << " " << (n-2) << endl;
+      
+
 
             // vpii vp;
             // fl(i,0,n)vp.pb({v[i],i});
