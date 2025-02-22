@@ -1,0 +1,1 @@
+{"name":"Local: fkkuldeep","url":"c:\\Users\\Kuldeep Agrahari\\Desktop\\algo\\algos\\Dijikstra\\fkkuldeep.cpp","tests":[{"id":1738774725978,"input":"1 1 1 2 3 3 5 7","output":"2\n-1\n11"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Kuldeep Agrahari\\Desktop\\algo\\algos\\Dijikstra\\fkkuldeep.cpp","group":"local","local":true}
