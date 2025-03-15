@@ -49,21 +49,23 @@ void stress_test(int test_cases) {
 
 void solve() {
     int n, x, sum = 0;
-
-    cin >> n >> x;
+    cin >> n;
+    // vector<int> a(n);
     string s;
     cin >> s;
-
-    vector<int> freq(26, 0);
-    int od = 0;
-    for(auto c: s)freq[c - 'a']++;
-    for(auto x: freq){
-        if(x & 1) od++;
+    map<char, int> mp;
+    map<char, int> mp2;
+    for(auto c: s) mp[c]++;
+    int ans = 0;
+    for(auto c: s){
+        mp[c]--;
+        if(mp[c] == 0) mp.erase(c);
+        mp2[c]++;
+        int ss1 = mp2.size();
+        int ss2 = mp.size();
+        ans = max(ans, ss1 + ss2);
     }
-    if(od - 1 > x) cout << "NO\n";
-    else cout << "YES\n";
-    
-    
+    cout << ans << endl;
 
     // cout << "Optimized Solution Output: " << optimized(a) << "\n";
 }
