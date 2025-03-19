@@ -20,7 +20,24 @@ int brute_force(vector<int> &a)
 
 void optimized(vector<int> &a, vector<int> &b)
 {
-   
+    // kyuki hame less than equal chahiye isliye , hum pehle upperbound nikaalenge jisse ye confirm ho jaye ki hame jo chahiye usse just badi value ho aur just usse pehle itr par ayenge to hame jo chahiye vo mil jaega
+    //isse alag se new lower bound function nhi likhna padega
+    int n = a.size(), m = b.size();
+    multiset<int> ms;
+    for(auto x: a) ms.insert(x);
+    for(int i = 0; i < m; i++){
+      auto it = ms.upper_bound(b[i]);
+      if(it == ms.begin()){
+        //not present in ms
+        cout << "-1\n";
+      }else{
+        it--;
+        cout << *it << endl;
+        ms.erase(it);
+      }
+    }
+
+    
 }
 
 // void stress_test(int test_cases) {
@@ -46,23 +63,15 @@ void optimized(vector<int> &a, vector<int> &b)
 void solve()
 {
     int n, m;
-    cin >> n;
-    vector<int> v(n);
-    for (int i = 0; i < n; i++)
-        cin >> v[i];
-    int l = 0, r = 0;
-    set<int> st;
-    int ans = 0;
-    for(; r < n; r++){
-        while(st.count(v[r]) != 0){
-            st.erase(v[l]);
-            l++;
-        }
-        st.insert(v[r]);
-        ans = max(ans, r - l + 1);
-    }
-    cout << ans << endl;
-    // optimized(pt, mpc);
+    cin >> n >> m;
+    vector<int> pt(n);
+    for (int &x : pt)
+        cin >> x;
+    vector<int> mpc(m);
+    for (int &x : mpc)
+        cin >> x;
+
+    optimized(pt, mpc);
 }
 
 int main()

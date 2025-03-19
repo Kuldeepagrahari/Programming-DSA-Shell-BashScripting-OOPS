@@ -50,16 +50,11 @@ void solve()
     vector<int> v(n);
     for (int i = 0; i < n; i++)
         cin >> v[i];
-    int l = 0, r = 0;
-    set<int> st;
+    vector<int> vis(n, 0);
     int ans = 0;
-    for(; r < n; r++){
-        while(st.count(v[r]) != 0){
-            st.erase(v[l]);
-            l++;
-        }
-        st.insert(v[r]);
-        ans = max(ans, r - l + 1);
+    for(int i = 0; i < n ; i++){
+        vis[v[i]] = 1;
+        if(vis[v[i] - 1] == 0) ans++;
     }
     cout << ans << endl;
     // optimized(pt, mpc);
