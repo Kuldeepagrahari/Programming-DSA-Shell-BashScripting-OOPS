@@ -50,6 +50,20 @@ void stress_test(int test_cases) {
 void solve() {
     int n, x, m, sum = 0;
     cin >> n >> m;
+    int c1 = 0;
+    for(int i = 0 ; i < n ; i ++) for(int j = 0 ; j < m; j ++){
+        char ch;
+        cin >> ch;
+        if(ch == '1') c1 ++;
+    } 
+    
+    int mxm = 1;
+    if(n&1) mxm *= (n-1);
+    else mxm *= n;
+    if(m&1) mxm *= (m-1);
+    else mxm *= m;
+
+    cout << min(c1, abs(mxm - c1))<< endl;
     
     // cout << "Optimized Solution Output: " << optimized(a) << "\n";
 }
