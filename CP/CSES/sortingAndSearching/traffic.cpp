@@ -1,28 +1,5 @@
 
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
 
-#define debug(x) cout << #x << " = " << x << "\n";
-#define vdebug(a)         \
-    cout << #a << " = ";  \
-    for (auto x : a)      \
-        cout << x << " "; \
-    cout << "\n";
-
-void solve()
-{
-    int n, m;
-    cin >> n >> m;
-    vector<int> v(m);
-    for (int i = 0; i < m; i++)
-        cin >> v[i];
-    vector<int> vis(m + 1, 0);
-
-   for(int )
-}
-// 4 2 1 5 3
-// 2 3
 
 
 int main()
