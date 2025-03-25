@@ -50,19 +50,17 @@ void solve()
     vector<int> v(n);
     for (int i = 0; i < n; i++)
         cin >> v[i];
-    int l = 0, r = 0;
-    set<int> st;
+    multiset<int> ms;
     int ans = 0;
-    for(; r < n; r++){
-        //making the condition again true
-        while(st.count(v[r]) != 0){
-            st.erase(v[l]);
-            l++;
+    for(int i = 0; i < n; i++){
+        auto it = ms.upper_bound(v[i]);
+        // if base for present cube is present then put this above the base, means remove this cube as now base for this cube is new one having lesser size
+        if(it != ms.end()){
+            ms.erase(it);
         }
-        //making an operation said in the problem
-        st.insert(v[r]);
-        //track the ans as max or min
-        ans = max(ans, r - l + 1);
+        // if bse is not present then we need to make another tower, whose base will be the present cube
+        else ans++;
+        ms.insert(v[i]);
     }
     cout << ans << endl;
     // optimized(pt, mpc);

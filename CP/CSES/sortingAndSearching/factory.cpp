@@ -20,7 +20,6 @@ int brute_force(vector<int> &a)
 
 void optimized(vector<int> &a, vector<int> &b)
 {
-   
 }
 
 // void stress_test(int test_cases) {
@@ -42,29 +41,54 @@ void optimized(vector<int> &a, vector<int> &b)
 //     }
 //     cout << "All test Passed\n";
 // }
-
+ll predicate(vector<ll> &v, ll time)
+{
+    ll prod = 0;
+    for (ll i = 0; i < v.size(); i++)
+    {
+        prod += time / v[i];
+    }
+    return prod;
+}
 void solve()
 {
-    int n, m;
-    cin >> n;
-    vector<int> v(n);
+    ll n, m;
+    cin >> n >> m;
+    vector<ll> v(n);
     for (int i = 0; i < n; i++)
         cin >> v[i];
-    int l = 0, r = 0;
-    set<int> st;
-    int ans = 0;
-    for(; r < n; r++){
-        //making the condition again true
-        while(st.count(v[r]) != 0){
-            st.erase(v[l]);
-            l++;
-        }
-        //making an operation said in the problem
-        st.insert(v[r]);
-        //track the ans as max or min
-        ans = max(ans, r - l + 1);
+    // [6 15]
+    ll mini = *min_element(v.begin(), v.end());
+    ll maxi = *max_element(v.begin(), v.end());
+
+    ll l = m / n;
+    ll r = m / n;
+
+    if (m % n != 0)
+    {
+        l++;
+        r++;
     }
-    cout << ans << endl;
+    l *= mini;
+    r *= maxi;
+    ll minTime = LLONG_MAX;
+
+    while (r >= l)
+    {
+        ll time = l + (r - l) / 2;
+        ll prod = predicate(v, time);
+
+        if (prod < m)
+        {
+            l = time + 1;
+        }
+        else if (prod >= m)
+        {
+            r = time - 1;
+            minTime = time;
+        }
+    }
+    cout << minTime << endl;
     // optimized(pt, mpc);
 }
 
