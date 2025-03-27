@@ -9,8 +9,10 @@ typedef long long ll;
 void solve() {
     int n;
     cin >> n;
-    vector<int> a(n);
-    for (int &x : a) cin >> x;
+    // vector<int> a(n);
+    // for (int &x : a) cin >> x;
+    if(n % 3 == 0) cout << "Second\n";
+    else cout << "First\n";
 
    
 }
