@@ -57,7 +57,7 @@ void solve()
 
 
 
-     cin >> n >> x;
+    cin >> n >> x;
     for(int i = 0; i < n; i++) cin >> c[i];
 
     for(int i = 0; i <= n; i++) {
