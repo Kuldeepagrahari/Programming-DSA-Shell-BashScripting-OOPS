@@ -9,6 +9,7 @@
         "valarray": "cpp",
         "vector": "cpp",
         "cstdlib": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "iomanip": "cpp"
     }
 }

@@ -11,26 +11,32 @@ void solve() {
     string s, ss;
     cin >> n;
     cin >> s >> ss;
-    int f = 1;
-    for (int i = 0; i < n ; i ++){
-      if( i > 0 && i < n - 1 && s[i] == '1' && ss[i + 1] == '1' && ss[i - 1] == '1') {
-        f = 0;
-        break;
-      }
-      else if (i == 0){
-        if(s[i] == '1' && ss[i + 1] == '1'){
-            f = 0;
-            break;
-        }
-      }else if(i == n - 1){
-        if(s[i] == '1' && ss[i - 1] == '1'){
-            f = 0;
-            break;
-        }
+    int ones = 0;
+    // minimum ceil(n/2) zeros 1st wali alt string me aur min floor(n/2) wali me zeros hone chahiye 
+    for(int i = 0; i < n; i++){
+      if(i & 1){
+        if(s[i] == '1') ones++;
+      }else {
+        if(ss[i] == '1') ones++;
       }
     }
-    if(f) cout << "YES\n";
-    else cout << "NO\n";
+    if(ones > n -  n / 2) {
+      cout << "NO\n";
+      return;
+    }
+    ones = 0;
+    for(int i = 0; i < n; i++){
+      if(i & 1){
+        if(ss[i] == '1') ones++;
+      }else {
+        if(s[i] == '1') ones++;
+      }
+    }
+     if(ones > n / 2) {
+      cout << "NO\n";
+      return;
+    }
+    cout << "YES\n";
    
 }
 
