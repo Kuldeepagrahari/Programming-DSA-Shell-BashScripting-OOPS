@@ -11,14 +11,32 @@ typedef long long ll;
 
 void solve()
 {
-    int n, m;
+    int n, x, k;
     cin >> n;
 
     vector<int> a(n);
-
-    for (int &x : a)
-        cin >> x;
    
+
+    for (int &it : a)
+        cin >> it;
+   
+
+    set<int> st;
+    int ans = 0;
+    set<int> stq;
+    for(auto x: a) st.insert(x);
+    for(int i = 0; i < n ; i++){
+        int q;
+        cin >> q;
+        st.erase(a[q - 1]);
+        if(stq.count(a[q]) == 1) ans+= 0;
+        else if(st.count(q) == 1) ans += 2;
+        else ans ++;
+        cout << ans << " ";
+        stq.insert(q);
+        
+    }
+    cout << endl;
 }
 
 signed main()

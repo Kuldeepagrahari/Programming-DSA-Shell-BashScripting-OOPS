@@ -13,11 +13,11 @@ void solve()
 {
     int n, m;
     cin >> n;
+    cout << 2 * n << endl;
+    // vector<int> a(n);
 
-    vector<int> a(n);
-
-    for (int &x : a)
-        cin >> x;
+    // for (int &x : a)
+    //     cin >> x;
    
 }
 
