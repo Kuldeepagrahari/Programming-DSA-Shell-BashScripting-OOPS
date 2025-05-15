@@ -2,6 +2,7 @@
 using namespace std;
 typedef long long ll;
 #define int long long
+
 #define debug(x) cout << #x << " = " << x << "\n";
 #define vdebug(a)         \
     cout << #a << " = ";  \
