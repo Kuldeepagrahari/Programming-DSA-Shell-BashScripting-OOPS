@@ -1,0 +1,5 @@
+1. Carefully handle overflow of indices: not forget to add i < n or j < m conditions where you are accessing or incrementing the value at index or index itself
+2.As this overflow of indices result into some garbage comparisons -> wrong or runtime error
+3. if Arrays are Sorted: move i and j ptrs by comparing respective values may be in values of same arrays or opposite arrays
+4. Intersection problems, merge problems 
+5.implement with while loop -> sometimes nested while loops also be req
