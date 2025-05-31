@@ -17,6 +17,7 @@ int main(){
     // auto f5 = [a, b](int x, int y) { return a + b + x + y; }; // capture by value with parameters, no return type specified
     // auto f6 = [&a, &b](int x, int y) { return a + b + x + y;}; // capture bu ref with parameters, no return type
 
+
     // Calling later with extra parameters
     auto f = [&](int i) -> int{return a+b+i;};
     for(int i = 0; i < 10; i++)
@@ -26,7 +27,18 @@ int main(){
     for(int i = 0; i < 10; i++)
     [&]() -> void{cout << a + b + i << endl;}();
 
+    // If want to call the same lamda function inside body: then initialize with function<ReturnType(parameter1, parameter2..)>
+
+    // function<void(int)> K = [&](int stInd) -> void {
+    //     ans.push_back(subset);
+
+    //     for(int i = stInd; i < n; i++){
+    //         subset.push_back(nums[i]);
+    //         K(i + 1);
+    //         subset.pop_back();
+    //     }
+    // };
+    // K(0);
     
-    
-    //when the parameters and return type mandatory and when optional: when no extra variables required to pass only those which already defined
+    //when the parameters and return type mandatory and when optional: when no extra variables required to pass only those which already defined & return type is mandatory when return is not clear i.e complex and multiple and recursive
 }
